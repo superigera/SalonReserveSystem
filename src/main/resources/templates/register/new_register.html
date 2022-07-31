@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/layout}">
+<head>
+<meta charset="UTF-8">
+
+<title></title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<form th:action="@{/register/register_confirm}" th:object="${signupForm}" method="post" >
+			<h1>新規会員登録画面</h1>
+			<h3>登録ボタン押下時にDB登録</h3>
+			<h3>バリデーション</h3>
+			<h3>パスワード一致の確認</h3>
+			<div>
+				<label for="name">氏名</label>
+				<input type="text" th:field="*{name}">
+				<div th:errors="*{name}"></div>
+			</div>
+			<div>
+				<label for="email">Email</label>
+				<input type="email" th:field="*{email}">
+				<div th:errors="*{email}"></div>
+			</div>
+			<div>
+				<label for="phone_number">電話番号</label>
+				<input type="tel" th:field="*{phone_number}">
+				<div th:errors="*{phone_number}"></div>
+			</div>
+			<div>
+				<label for="age">年齢</label>
+				<input type="text" th:field="*{age}">
+				<div th:errors="*{age}"></div>
+			</div>
+			<div>
+				<label for="gender">性別</label>
+				<div th:each="item:${genderMap}">
+					<input type="radio" th:value="${item.value}" th:field="*{gender}">
+					<label th:text="${item.key}"></label>
+				</div>
+				<div th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></div>
+			</div>
+			<div>
+				<label for="password">パスワード</label>
+				<input type="password" th:field="*{password}">
+				<div th:errors="*{password}"></div>
+			</div>
+			<div>
+				<label for="password_confirm">パスワード確認</label>
+				<input type="password">
+			</div>
+			<button>登録</button>
+		</form> 
+	</div>
+</body>
+</html>
