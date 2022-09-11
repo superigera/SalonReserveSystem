@@ -3,7 +3,7 @@ package com.example.model;
 import lombok.Data;
 
 @Data
-public class Members {
+public class Member {
 
 	private Integer member_id;
 

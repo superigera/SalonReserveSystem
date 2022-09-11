@@ -1,11 +1,12 @@
 CREATE TABLE IF NOT EXISTS menu (
-  menu_id VARCHAR(50) PRIMARY KEY,
-  name VARCHAR(50),
-  price INT
+  menu_id VARCHAR(50) PRIMARY KEY AUTO_INCREMENT,
+  menu_name VARCHAR(50),
+  menu_price INT,
+  menu_times INT
 );
 
 create table if not exists reservations(
-	reservations_id varchar(50) primary key,
+	reservations_id varchar(50) primary key AUTO_INCREMENT,
 	menu_id varchar(50),
 	member_id varchar(50),
 	non_member_nane varchar(50),
@@ -15,13 +16,12 @@ create table if not exists reservations(
 );
 
 create table if not exists members(
-	member_id_id varchar(50) primary key,
+	member_id varchar(50) primary key AUTO_INCREMENT,
 	name varchar(50),
 	email varchar(50),
 	phone_number varchar(50),
-	age int,
-	sex boolean,
-	birth date,
+	age Integer,
+	gender Integer,
 	password varchar(50),
 	created_at date,
 	update_at date,

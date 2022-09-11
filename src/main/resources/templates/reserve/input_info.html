@@ -1,16 +1,75 @@
 <!DOCTYPE html>
-<html xmlns:th="www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>個人情報入力画面</title>
+<style>
+body {
+	background-image:
+		url("https://boccitabi.net/photostock/wp-content/uploads/2021/04/4472830_s_1024.jpg");
+	background-size: cover;
+}
+
+input {
+	border-radius: 30px;
+	line-height: 30px;
+	width: 350px;
+	border-radius: 30px;
+	margin:auto;
+}
+
+div.flex {
+	display: flex;
+	justify-content: space-between;
+}
+
+</style>
 </head>
 <body>
-	<h1>個人情報入力画面</h1>
-	
-	<!-- 仮でGET -->
-	<form action="/reserve/confirm" method="get">
-		<button>登録</button>
-	</form>
+	<div layout:fragment="content">
+		<!-- 選択しているメニュー 戻るボタン -->
+		<div class="flex"  style="display: flex; margin-top: 30px; margin-left: 30px; border-radius: 10px;">
+			<table border="3" style="display: flex; background-color: #ffffff; border-radius: 10px ">
+				<tr>
+					<th>選択しているメニュー　</th>
+					<th>メニュー名　</th>
+					<th>料金　</th>
+					<th>所要時間目安　</th>
+					<th>日時　</th>
+				<tr>
+				<tr>
+					<th></th>
+					<th>test</th>
+					<th>test</th>
+					<th>test</th>
+					<th>test</th>
+				</tr>
+			</table>
+			<form action="/reserve/date_select" method="get">
+				<button style="background-color: #ffffff; margin-right: 10px; padding: 10px; border-radius: 10px; ">日時選択に戻る</button>
+			</form>
+		</div>
+
+
+		<!-- 個人情報入力 -->
+		<form action="/reserve/confirm" method="get"
+			style="display: flex; flex-direction: column; width: 400px; margin:auto; margin-top: 30px; padding-top: 20px; padding-bottom: 40px; padding-left: 30px; padding-right: 30px; background-color: #ffffff; border-radius: 20px; line-height: 35px; ">
+			<h2 style="text-decoration: underline; text-align: center;">　　　　個人情報入力　　　　</h2>
+
+			<label for="name">氏名</label>
+				<input type="text">
+			<label for="email">Email</label>
+				<input type="email">
+			<label for="phobe_number">電話番号</label>
+				<input type="tel"> <br>
+			<button style="background-color: green; color: #ffffff; margin: auto; width: 350px; border-radius: 30px; line-height: 30px;">確認</button>
+			<br>
+			<button style="background: transparent; border: none; margin: auto; width: 350px; border-radius: 30px;">ログインはこちら</button>
+		</form>
+	</div>
+
 
 </body>
 </html>

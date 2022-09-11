@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+body{
+	background-image:
+	url("../img/back_bokashi.jpg");
+	background-size: cover;
+}
+
+input {
+	border-radius: 30px;
+	line-height: 30px;
+	width: 350px;
+	border-radius: 30px;
+	margin:auto;
+}
+
+button {
+	line-height: 30px;
+	border-radius: 30px;
+	width: 310px;
+}
+
+div.flex {
+	display: flex;
+	justify-content: space-between;
+}

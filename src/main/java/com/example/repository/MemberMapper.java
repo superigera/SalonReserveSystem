@@ -2,11 +2,12 @@ package com.example.repository;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.example.model.Members;
+import com.example.model.Member;
 
 @Mapper
-public interface UserMapper {
+public interface MemberMapper {
 
 	// ユーザー登録
-	public int insertOne(Members members);
+	public int insertOne(Member member);
+
 }

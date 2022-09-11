@@ -1,12 +1,66 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>個人情報入力画面</title>
+<style>
+body {
+	background-image:
+		url("https://boccitabi.net/photostock/wp-content/uploads/2021/04/4472830_s_1024.jpg");
+	background-size: cover;
+}
+
+button {
+	line-height: 30px;
+	border-radius: 30px;
+	width: 310px;
+}
+
+form p {
+	height: 15px;
+	line-height: 0px;
+}
+
+</style>
 </head>
 <body>
-	<h1>新規登録確認画面</h1>
+	<div layout:fragment="content">
 
-	
+		<!-- 個人情報入力 -->
+		<form action="/register/confirm" method="post" th:object="${signupForm}"
+			style="display: flex; flex-direction: column; width: 400px; margin:auto; margin-top: 30px; padding-top: 20px; padding-bottom: 40px; padding-left: 30px; padding-right: 30px; background-color: #ffffff; border-radius: 20px; line-height: 35px; ">
+			<h2 style="text-decoration: underline; text-align: center;">　　　　新規会員登録確認　　　　</h2>
+
+			<div>氏名</div>
+				<p th:text="*{name}"></p>
+			<div>Email</div>
+				<p th:text="*{email}">
+			<div>電話番号</div>
+				<p th:text="*{phone_number}">
+			<div>年齢</div>
+				<p th:text="*{age}">
+			<div>性別</div>
+				<div th:switch="${gender}">
+					<p th:case = "1" th:text="男性"></p>
+					<p th:case = "2" th:text="女性"></p>
+					<p th:case = "3" th:text="その他"></p>
+				</div>
+			<div>パスワード</div>
+				<p th:text="*{password}"></p>
+			<div><input type="checkbox">確認しました</div>
+			<br>
+				<input type="hidden" name="name" th:field="*{name}">
+				<input type="hidden" name="email" th:field="*{email}">
+				<input type="hidden" name="phone_number" th:field="*{phone_number}">
+				<input type="hidden" name="age" th:field="*{age}">
+				<input type="hidden" name="gender" th:field="*{gender}">
+				<input type="hidden" name="password" th:field="*{password}">
+			<button style="background-color: green; color: #ffffff; margin: auto; width: 350px;">登録</button>
+		</form>
+	</div>
+
+
 </body>
 </html>

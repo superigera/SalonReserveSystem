@@ -1,14 +1,110 @@
 <!DOCTYPE html>
-<html xmlns:th="www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>メニュー画面</title>
+<style>
+body {
+	background-image:
+		url("https://boccitabi.net/photostock/wp-content/uploads/2021/04/4472830_s_1024.jpg");
+	background-size: cover;
+}
+
+button {
+	border: solid;
+	border-color: #80a491;
+	border-radius: 10px;
+	background: transparent;
+	color: #80a491;
+}
+</style>
 </head>
 <body>
-	<h1>メニュー画面</h1>
+	<div layout:fragment="content">
+		<!-- メニュー -->
+		<form action="/reserve/new_reserve" method="post" style="display: flex; background-color: #ffffff; border-radius: 10px;margin-top: 30px; width: 500px; justify-content: space-between;">
+			<div>
+				<p>メニュー</p>
+				<input type="checkbox" name="menu" value="カット">カット
+				<input type="checkbox" name="menu" value="カラー">カラー
+				<input type="checkbox" name="menu" value="パーマ">パーマ
+			</div>
+			<button>検索</button>
+		</form>
+		
+		<!-- 選択しているメニュー -->
+		<form action="#" method="post" style="display: flex; background-color: #ffffff; border-radius: 10px; margin-top: 30px; width: 900px; justify-content: space-between;" >
+			<table border="3">
+				<tr>		
+					<th>選択しているメニュー</th>
+					<th>メニュー名　</th>
+					<th>料金　</th>
+					<th>所要時間目安　</th>
+					<th></th>
+				</tr>
+				<tr>
+					<th></th>
+					<th>tes</th>
+					<th>test</th>
+					<th>test</th>
+					<th><button>キャンセル</button></th>
+				</tr>
+				<tr>
+					<th></th>
+					<th>tes</th>
+					<th>test</th>
+					<th>test</th>
+					<th><button>キャンセル</button></th>
+				</tr>
+			</table>
+				<button style="height: 70px">選択しているメニューで予約する</button>
+		</form>
+		
+		<!-- メニュー一覧 -->
+		<table border="2" style="background-color: #ffffff; width: 1500px; margin: auto; line-height: 50px; margin-top: 30px;">
+			<tr>
+				<th>メニュー名</th>
+				<th>料金</th>
+				<th>所要時間目安</th>
+				<th></th>
+				<th></th>
+			</tr>
+			<tr>
+				<td>test</td>
+				<td>test</td>
+				<td>test</td>
+				<td style="text-align: center;"><button>予約</button></td>
+				<td style="text-align: center;"><button>追加</button></td>
+			</tr>
+			<tr>
+				<td>test</td>
+				<td>test</td>
+				<td>test</td>
+				<td style="text-align: center;"><button>予約</button></td>
+				<td style="text-align: center;"><button>追加</button></td>
+			</tr>
+				<tr>
+				<td>test</td>
+				<td>test</td>
+				<td>test</td>
+				<td style="text-align: center;"><button>予約</button></td>
+				<td style="text-align: center;"><button>追加</button></td>
+			</tr>
+			<tr>
+				<td>test</td>
+				<td>test</td>
+				<td>test</td>
+				<td style="text-align: center;"><button>予約</button></td>
+				<td style="text-align: center;"><button>追加</button></td>
+			</tr>
+		</table>
 	
-	<form action="/reserve/date_select" method="get">
-		<button>登録</button>
-	</form>
+		<!-- 画面遷移用 -->
+		<form action="/reserve/date_select" method="get">
+			<button style="color: #000000; border-color: #000000;">遷移用</button>
+		</form>
+	</div>
 </body>
 </html>

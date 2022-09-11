@@ -12,51 +12,63 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.application.UserApplicationService;
 import com.example.form.GroupOrder;
 import com.example.form.SignupForm;
-import com.example.model.Members;
-import com.example.service.UserService;
-
-import lombok.extern.slf4j.Slf4j;
+import com.example.model.Member;
+import com.example.service.MemberService;
 
 @Controller
 @RequestMapping("/register")
-@Slf4j
 public class MemberRegisterController {
 
 	@Autowired
-	private UserApplicationService userApplicationService;
-
-	@Autowired
-	private UserService userService;
+	private MemberService memberService;
 
 	@Autowired
 	private ModelMapper modelMapper;
 
-	// 新規登録画面
+	@Autowired
+	private UserApplicationService userApplicationService;
+
+	// 新規登録画面表示
 	@GetMapping("/new_register")
-	public String getSignup(Model model, @ModelAttribute SignupForm form) {
+	public String newRegister(Model model, @Validated @ModelAttribute SignupForm form) {
 		Map<String, Integer> genderMap = userApplicationService.getGenderMap();
 		model.addAttribute("genderMap", genderMap);
 		return "register/new_register";
 	}
 
-	// 確認画面
-	@PostMapping("/register_confirm")
-	public String newMember(Model model, @ModelAttribute @Validated(GroupOrder.class) SignupForm form,
-			BindingResult result) {
+	// 新規登録確認画面表示
+	@PostMapping("/post_confirm")
+	public String postConfirm(Model model, @RequestParam("name") String name, @RequestParam("email") String email,
+			@RequestParam("phone_number") String phone_number, @RequestParam("age") String age,
+			@RequestParam("gender") String gender, @RequestParam("password") String password,
+			@ModelAttribute @Validated(GroupOrder.class) SignupForm form, BindingResult result) {
+		model.addAttribute("name", name);
+		model.addAttribute("email", email);
+		model.addAttribute("phone_number", phone_number);
+		model.addAttribute("age", age);
+		model.addAttribute("gender", gender);
+		model.addAttribute("password", password);
 
 		if (result.hasErrors()) {
-			return getSignup(model, form);
+			return newRegister(model, form);
 		}
 
-		log.info(form.toString());
-
-		Members members = modelMapper.map(form, Members.class);
-		userService.signup(members);
-
 		return "register/register_confirm";
+	}
+
+	// DB登録
+	@PostMapping("/confirm")
+	public String confirmRegister(Model model, @ModelAttribute @Validated(GroupOrder.class) SignupForm form) {
+
+		Member member = modelMapper.map(form, Member.class);
+
+		memberService.signup(member);
+
+		return "top/top";
 	}
 }
