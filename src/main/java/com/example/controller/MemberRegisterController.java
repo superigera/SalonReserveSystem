@@ -42,12 +42,8 @@ public class MemberRegisterController {
 
 	// 新規登録確認画面表示
 	@PostMapping("/post_confirm")
-	public String postConfirm(Model model,
-//			@RequestParam("name") String name, @RequestParam("email") String email,
-//			@RequestParam("phone_number") String phone_number, @RequestParam("age") String age,
-//			@RequestParam("gender") String gender, @RequestParam("password") String password,
-			@ModelAttribute @Validated(GroupOrder.class) SignupForm form, BindingResult result) {
-//		System.out.println(form);
+	public String postConfirm(Model model, @ModelAttribute @Validated(GroupOrder.class) SignupForm form,
+			BindingResult result) {
 		model.addAttribute("name", form.getName());
 		model.addAttribute("email", form.getEmail());
 		model.addAttribute("phone_number", form.getPhone_number());
