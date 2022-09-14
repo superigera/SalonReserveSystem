@@ -38,10 +38,10 @@
 				
 			<label for="gender">性別</label>
 			<div style="display:flex; justify-content: space-between;">
-				<div th:each="item:${genderMap}" >
-					<input type="radio" th:value="${item.value}" style="width: 80px;">
-					<label th:text="${item.key}" th:field="*{gender}" ></label>
-				</div>
+                <div th:each="item:${genderMap}" >
+                    <input type="radio" th:value="${item.value}" th:text="${item.key}" th:field="*{gender}" style="width: 80px;">
+                    <!-- <label th:text="${item.key}" th:field="*{gender}" ></label> -->
+                </div>
 			</div>
 			<div class="error" th:errors="*{gender}"></div>
 

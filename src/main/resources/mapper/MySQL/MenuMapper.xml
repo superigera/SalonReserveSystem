@@ -5,7 +5,7 @@
  <mapper namespace="com.example.repository.MenuMapper">
 
 	<!-- メニュー取得 -->
-	<select id="findMenu" resultType="Menu">
+	<select id="findMenu" resultType="com.example.model.Menu">
 		select * from menu
 	</select>
 	

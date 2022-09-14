@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.application.UserApplicationService;
 import com.example.form.GroupOrder;
@@ -43,16 +42,18 @@ public class MemberRegisterController {
 
 	// 新規登録確認画面表示
 	@PostMapping("/post_confirm")
-	public String postConfirm(Model model, @RequestParam("name") String name, @RequestParam("email") String email,
-			@RequestParam("phone_number") String phone_number, @RequestParam("age") String age,
-			@RequestParam("gender") String gender, @RequestParam("password") String password,
+	public String postConfirm(Model model,
+//			@RequestParam("name") String name, @RequestParam("email") String email,
+//			@RequestParam("phone_number") String phone_number, @RequestParam("age") String age,
+//			@RequestParam("gender") String gender, @RequestParam("password") String password,
 			@ModelAttribute @Validated(GroupOrder.class) SignupForm form, BindingResult result) {
-		model.addAttribute("name", name);
-		model.addAttribute("email", email);
-		model.addAttribute("phone_number", phone_number);
-		model.addAttribute("age", age);
-		model.addAttribute("gender", gender);
-		model.addAttribute("password", password);
+//		System.out.println(form);
+		model.addAttribute("name", form.getName());
+		model.addAttribute("email", form.getEmail());
+		model.addAttribute("phone_number", form.getPhone_number());
+		model.addAttribute("age", form.getAge());
+		model.addAttribute("gender", form.getGender());
+		model.addAttribute("password", form.getPassword());
 
 		if (result.hasErrors()) {
 			return newRegister(model, form);
