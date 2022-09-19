@@ -2,13 +2,13 @@ package com.example.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.model.Menu;
 import com.example.repository.MenuMapper;
 
-@Mapper
+@Service
 public class MenuServiceImpl implements MenuService {
 
 	@Autowired
