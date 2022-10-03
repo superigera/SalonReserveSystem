@@ -9,6 +9,9 @@ import com.example.model.Menu;
 @Mapper
 public interface MenuMapper {
 
-	// メニュー取得
+	// メニュー全件取得
 	public List<Menu> findMenu();
+
+	// メニュー検索
+	public List<Menu> SearchMenu(int menu_id);
 }

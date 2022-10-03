@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.model.Menu;
 import com.example.service.MemberService;
@@ -31,14 +33,21 @@ public class ReserveController {
 		List<Menu> menuList = menuService.getMenus();
 
 		model.addAttribute("menuList", menuList);
+		model.addAttribute("menu", new Menu());
 
 		return "reserve/menu";
 	}
 
 	// メニュー画面 検索
-	@PostMapping("/new_reserve")
-	public String menu_search() {
-		return "redirect:/reserve/new_reserve";
+	@PostMapping("/search")
+	public String menu_search(@RequestParam("menu_id") Integer[] menuLists, Model model) {
+		List<Menu> menuList = new ArrayList<>();
+		for (int i = 0; i < menuLists.length; i++) {
+			menuList.addAll(menuService.SearchMenu(menuLists[i]));
+		}
+		model.addAttribute("menu", menuList);
+
+		return "reserve/menu";
 	}
 
 	// 日時選択画面 仮でGET

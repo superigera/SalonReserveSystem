@@ -19,4 +19,9 @@ public class MenuServiceImpl implements MenuService {
 		return menu_mapper.findMenu();
 	}
 
+	@Override
+	public List<Menu> SearchMenu(int menu_id) {
+		return menu_mapper.SearchMenu(menu_id);
+	}
+
 }
