@@ -28,10 +28,9 @@ public class ReserveController {
 	// メニュー画面
 	@GetMapping("/new_reserve")
 	public String menu(Model model) {
-
 		// メニュー一覧取得
 		List<Menu> menuList = menuService.getMenus();
-
+//		System.out.println(menuService.getMenus());
 		model.addAttribute("menuList", menuList);
 		model.addAttribute("menu", new Menu());
 
@@ -45,7 +44,9 @@ public class ReserveController {
 		for (int i = 0; i < menuLists.length; i++) {
 			menuList.addAll(menuService.SearchMenu(menuLists[i]));
 		}
-		model.addAttribute("menu", menuList);
+		System.out.println(menuList);
+		model.addAttribute("menuList", menuList);
+		model.addAttribute("menu", new Menu());
 
 		return "reserve/menu";
 	}
