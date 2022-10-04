@@ -24,13 +24,11 @@ button {
 <body>
 	<div layout:fragment="content">
 		<!-- メニュー -->
-		<form action="/reserve/new_reserve" method="post" style="display: flex; background-color: #ffffff; border-radius: 10px;margin-top: 30px; width: 500px; justify-content: space-between;">
-			<div>
-				<p>メニュー</p>
-				<input type="checkbox" name="menu" value="カット">カット
-				<input type="checkbox" name="menu" value="カラー">カラー
-				<input type="checkbox" name="menu" value="パーマ">パーマ
-			</div>
+		<form action="/reserve/search" method="post" th:object="${menu}" style="display: flex; background-color: #ffffff; border-radius: 10px;margin-top: 30px; width: 500px; justify-content: space-between;">
+			<p>メニュー</p>
+			<label th:each="menu_item:${menuList}">
+				<input type="checkbox" name="check_menu" th:text="${menu_item.menu_name}" th:value="${menu_item.menu_id}" th:field=*{menu_id}>
+			</label>
 			<button>検索</button>
 		</form>
 		
@@ -43,13 +41,6 @@ button {
 					<th>料金　</th>
 					<th>所要時間目安　</th>
 					<th></th>
-				</tr>
-				<tr>
-					<th></th>
-					<th>tes</th>
-					<th>test</th>
-					<th>test</th>
-					<th><button>キャンセル</button></th>
 				</tr>
 				<tr>
 					<th></th>
@@ -71,31 +62,11 @@ button {
 				<th></th>
 				<th></th>
 			</tr>
-			<tr>
-				<td>test</td>
-				<td>test</td>
-				<td>test</td>
-				<td style="text-align: center;"><button>予約</button></td>
-				<td style="text-align: center;"><button>追加</button></td>
-			</tr>
-			<tr>
-				<td>test</td>
-				<td>test</td>
-				<td>test</td>
-				<td style="text-align: center;"><button>予約</button></td>
-				<td style="text-align: center;"><button>追加</button></td>
-			</tr>
-				<tr>
-				<td>test</td>
-				<td>test</td>
-				<td>test</td>
-				<td style="text-align: center;"><button>予約</button></td>
-				<td style="text-align: center;"><button>追加</button></td>
-			</tr>
-			<tr>
-				<td>test</td>
-				<td>test</td>
-				<td>test</td>
+			
+			<tr th:each="menu:${menus}">
+				<td th:text="${menu.menu_name}"></td>
+				<td th:text="${menu.menu_price}"></td>
+				<td th:text="${menu.menu_times}"></td>
 				<td style="text-align: center;"><button>予約</button></td>
 				<td style="text-align: center;"><button>追加</button></td>
 			</tr>

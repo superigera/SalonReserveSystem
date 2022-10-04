@@ -4,9 +4,13 @@
  
  <mapper namespace="com.example.repository.MenuMapper">
 
-	<!-- メニュー取得 -->
+	<!-- メニュー全件取得 -->
 	<select id="findMenu" resultType="com.example.model.Menu">
 		select * from menu
 	</select>
 	
+	<!-- メニュー1件取得 -->
+	<select id="SearchMenu" resultType="com.example.model.Menu">
+		select * from menu where menu_Id=#{menu_Id}
+	</select>
 </mapper>
