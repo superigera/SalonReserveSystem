@@ -64,11 +64,11 @@ div.flex {
 					<th>料金　</th>
 					<th>所要時間目安　</th>
 				<tr>
-				<tr>
-					<th></th>
-					<th>test</th>
-					<th>test</th>
-					<th>test</th>
+				<tr th:each="menu:${menus}">
+					<td></td>
+					<td th:text="${menu.menu_name}"></td>
+					<td th:text="${menu.menu_price}"></td>
+					<td th:text="${menu.menu_times}"></td>
 				</tr>
 			</table>
 			<form action="/reserve/new_reserve" method="get">

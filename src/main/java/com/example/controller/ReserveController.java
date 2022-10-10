@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.example.model.Menu;
 import com.example.service.MemberService;
@@ -18,7 +17,7 @@ import com.example.service.MenuService;
 
 @Controller
 @RequestMapping("/reserve")
-@SessionAttributes(types = Menu.class)
+//@SessionAttributes(types = Menu.class)
 public class ReserveController {
 
 	@Autowired
@@ -76,9 +75,11 @@ public class ReserveController {
 		return "reserve/menu";
 	}
 
-	// 日時選択画面 仮でGET
-	@GetMapping("/date_select")
-	public String date_select() {
+	// 日時選択画面
+	@PostMapping("/date_select")
+	public String date_select(@RequestParam("menu_id") Integer menu_id, Model model) {
+//		System.out.println(menu_id);
+		model.addAttribute("menus", menuService.SearchMenu(menu_id));
 		return "reserve/date_select";
 	}
 
