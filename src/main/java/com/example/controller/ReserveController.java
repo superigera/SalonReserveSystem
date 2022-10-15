@@ -56,30 +56,17 @@ public class ReserveController {
 		return "reserve/menu";
 	}
 
-	// 選択しているメニューに追加
-	@PostMapping("/add")
-	public String add_menu(Model model,
-//			, HttpServletRequest request
-			@RequestParam("menu_id") Integer menu_id) {
-		// メニュー一覧取得
-		List<Menu> menuList = menuService.getMenus();
-		model.addAttribute("menuList", menuList);
-		model.addAttribute("menus", menuList);
-		model.addAttribute("menu", new Menu());
-
-		List<Menu> add_menus = new ArrayList<>();
-		add_menus.addAll(menuService.SearchMenu(menu_id));
-		model.addAttribute("add_menus", add_menus);
-//		System.out.println(request.getAttributeNames());
-
-		return "reserve/menu";
-	}
-
 	// 日時選択画面
 	@PostMapping("/date_select")
-	public String date_select(@RequestParam("menu_id") Integer menu_id, Model model) {
-//		System.out.println(menu_id);
-		model.addAttribute("menus", menuService.SearchMenu(menu_id));
+	public String date_select(@RequestParam("menu_id") Integer[] menuLists, Model model) {
+
+		List<Menu> menus = new ArrayList<>();
+		for (int i = 0; i < menuLists.length; i++) {
+			menus.addAll(menuService.SearchMenu(menuLists[i]));
+		}
+
+		model.addAttribute("menus", menus);
+		model.addAttribute("menu", new Menu());
 		return "reserve/date_select";
 	}
 

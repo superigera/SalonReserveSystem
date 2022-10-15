@@ -33,23 +33,16 @@ button {
 		</form>
 		
 		<!-- 選択しているメニュー -->
-		<form action="#" method="post" style="display: flex; background-color: #ffffff; border-radius: 10px; margin-top: 30px; width: 900px; justify-content: space-between;" >
-			<table border="3">
+		<form action="/reserve/date_select" method="post" th:object="${menu}" style="display: flex; background-color: #ffffff; border-radius: 10px; margin-top: 30px; width: 900px; justify-content: space-between;" >
+			<table border="3" id="add_menus">
 				<tr>		
 					<th>選択しているメニュー</th>
 					<th>メニュー名　</th>
 					<th>料金　</th>
 					<th>所要時間目安　</th>
-					<th></th>
+					<th>　　　　　</th>
 				</tr>
-				<tr id="add_menus">
-					<th></th>
-					<tr th:each="menu:${add_menus}">
-					<td th:text="${menu.menu_name}"></td>
-					<td th:text="${menu.menu_price}"></td>
-					<td th:text="${menu.menu_times}"></td>
-					<th><button>キャンセル</button></th>
-				</tr>
+
 			</table>
 				<button style="height: 70px">選択しているメニューで予約する</button>
 		</form>
@@ -74,16 +67,57 @@ button {
 					</form>
 				</td>
 				<td style="text-align: center;">
-					<button id="add_menu">追加</button>
+					<button th:onclick="|add_menu('__${menu.menu_id}__')|">追加</button>
 				</td>				
+				
+				<script th:inline="javascript">
+					function add_menu(id){
+						const menu = /*[[ ${menuList} ]]*/
+						
+						menu.forEach((menu) => {
+							if(id == menu.menu_id){
+								const tr = document.createElement("tr");
+								const th = document.createElement("th");
+								const td_name = document.createElement("td");
+								const td_price = document.createElement("td");
+								const td_times = document.createElement("td");
+								const cancel_buton_outer = document.createElement("td");
+								const cancel_button = document.createElement("button");
+								cancel_button.innerText = "キャンセル";
+								cancel_buton_outer.appendChild(cancel_button);
+								
+								tr.className = id;
+								tr.setAttribute("id", id)
+								tr.setAttribute("value", id)
+								tr.setAttribute("name", "menu_id")
+								
+								td_name.innerText = menu.menu_name;
+								td_price.innerText = menu.menu_price;
+								td_times.innerText = menu.menu_times;
+								
+								cancel_button.addEventListener("click", (id) => {
+									 console.log(id);
+									 document.getElementsByClassName(id).remove();
+								});
+								
+								
+								tr.appendChild(th);
+								tr.appendChild(td_name);
+								tr.appendChild(td_price);
+								tr.appendChild(td_times);
+								tr.appendChild(cancel_buton_outer);
+								document.getElementById("add_menus").appendChild(tr);
+								
+								console.log(add_menus);
+								
+							}
+						})
+						
+
+					}
+				</script>
 			</tr>
 		</table>
-	
-		<!-- 画面遷移用 -->
-		<form action="/reserve/date_select" method="get">
-			<button style="color: #000000; border-color: #000000;">遷移用</button>
-		</form>
 	</div>
-	<script src="./menu_add.js"></script>
 </body>
 </html>

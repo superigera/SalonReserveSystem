@@ -19,7 +19,10 @@
 				center : 'title',
 				right : 'next'
 			},
-			navLinkdayClick : false, //日がクリックされたらイベント
+			navLinks: true,
+			  navLinkDayClick: function(date) {
+				    console.log(date.getMonth()+1,date.getDate());
+			  },
 			businessHours : true, // display business hours
 			editable : true,
 			selectable : true,
