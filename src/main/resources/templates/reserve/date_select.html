@@ -7,31 +7,6 @@
 
 <link href='../../lib/main.css' rel='stylesheet' />
 <script src='../../lib/main.js'></script>
-<script>
-	document.addEventListener('DOMContentLoaded', function() {
-		var calendarEl = document.getElementById('calendar');
-
-		var calendar = new FullCalendar.Calendar(calendarEl, {
-			locale: 'ja',
-			
-			headerToolbar : {
-				left : 'prev',
-				center : 'title',
-				right : 'next'
-			},
-			navLinks: true,
-			  navLinkDayClick: function(date) {
-				    console.log(date.getMonth()+1,date.getDate());
-			  },
-			businessHours : true, // display business hours
-			editable : true,
-			selectable : true,
-			events : [ ]
-		});
-
-		calendar.render();
-	});
-</script>
 <title>予約確認画面</title>
 <style>
 body {
@@ -66,13 +41,37 @@ div.flex {
 					<th>メニュー名　</th>
 					<th>料金　</th>
 					<th>所要時間目安　</th>
+					<th>日付</th>
+					<th>時間</th>
+					<th></th>
 				<tr>
-				<tr th:each="menu:${menus}">
-					<td></td>
-					<td th:text="${menu.menu_name}"></td>
-					<td th:text="${menu.menu_price}"></td>
-					<td th:text="${menu.menu_times}"></td>
-				</tr>
+				<form action="/reserve/input_info" method="post" th:object="${menu}">
+					<tr th:each="menu:${menus}">
+						<td></td>
+						<td th:text="${menu.menu_name}"></td>
+						<td th:text="${menu.menu_price}"></td>
+						<td th:text="${menu.menu_times}"></td>
+						<td id="day"></td>
+						<td>
+							<select name="time">
+								<option value="9">9:00</option>
+								<option value="10">10:00</option>
+								<option value="11">11:00</option>
+								<option value="12">12:00</option>
+								<option value="13">13:00</option>
+								<option value="15">15:00</option>
+								<option value="16">16:00</option>
+								<option value="17">17:00</option>
+								<option value="18">18:00</option>
+								<option value="19">19:00</option>
+							</select>
+						</td>
+						<input type="hidden" th:name="menu_id" th:value="${menu.menu_id}"> 
+						<td>
+							<button>予約</button>
+						</td>
+					</tr>
+				</form>
 			</table>
 			<form action="/reserve/new_reserve" method="get">
 				<button style="background-color: #ffffff; margin-right: 10px; padding: 10px; border-radius: 10px; ">メニュー選択に戻る</button>
@@ -80,11 +79,41 @@ div.flex {
 		</div>
 
 		<!-- カレンダー -->
-		<div id='calendar' style="margin: auto; width: 500px; background-color: #ffffff;" ></div>
-		<!-- 遷移用 -->
-		<form action="/reserve/input_info" method="get">
-			<button>遷移用</button>
-		</form>
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				var calendarEl = document.getElementById('calendar');
+		
+				var calendar = new FullCalendar.Calendar(calendarEl, {
+					
+					locale: 'ja',
+					
+					headerToolbar : {
+						left : 'prev',
+						center : 'title',
+						right : 'next'
+					},
+					navLinks: true,
+
+					navLinkDayClick: function(date) {
+						const text = document.getElementById("day").textContent;
+						document.getElementById("day").textContent = `${date.getMonth()+1}月${date.getDate()}日`
+						//document.getElementById("day").setAttribute("value", "" + (date.getMonth()+1) + "," + date.getDate())
+						const input = document.createElement("input");
+						input.setAttribute("type", "hidden");
+						input.setAttribute("name", "day");
+						input.setAttribute("value",  "" + (date.getMonth()+1) + "," + date.getDate());
+						document.getElementById("day").appendChild(input);
+					},
+					businessHours : true, 
+					selectable : true,
+		
+				});
+		
+				calendar.render();
+			});
+		</script>
+		<div id='calendar' style="margin: auto; width: 500px; background-color: #ffffff; margin-top: 50px"></div>
+
 	</div>
 </body>
 </html>
