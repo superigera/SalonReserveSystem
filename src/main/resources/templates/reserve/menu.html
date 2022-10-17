@@ -76,6 +76,7 @@ button {
 						
 						menu.forEach((menu) => {
 							if(id == menu.menu_id){
+								const input = document.createElement("input");
 								const tr = document.createElement("tr");
 								const th = document.createElement("th");
 								const td_name = document.createElement("td");
@@ -85,21 +86,19 @@ button {
 								const cancel_button = document.createElement("button");
 								cancel_button.innerText = "キャンセル";
 								cancel_buton_outer.appendChild(cancel_button);
+								cancel_buton_outer.appendChild(input);
 								
-								tr.className = id;
-								tr.setAttribute("id", id)
-								tr.setAttribute("value", id)
-								tr.setAttribute("name", "menu_id")
+								input.setAttribute("type", "hidden");
+								input.setAttribute("name", "menu_id");
+								input.setAttribute("value", id);
 								
 								td_name.innerText = menu.menu_name;
 								td_price.innerText = menu.menu_price;
 								td_times.innerText = menu.menu_times;
 								
-								cancel_button.addEventListener("click", (id) => {
-									 console.log(id);
-									 document.getElementsByClassName(id).remove();
+								cancel_button.addEventListener("click", () => {
+									event.target.closest("tr").remove();
 								});
-								
 								
 								tr.appendChild(th);
 								tr.appendChild(td_name);

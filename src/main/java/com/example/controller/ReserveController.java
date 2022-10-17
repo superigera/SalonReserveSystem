@@ -59,7 +59,7 @@ public class ReserveController {
 	// 日時選択画面
 	@PostMapping("/date_select")
 	public String date_select(@RequestParam("menu_id") Integer[] menuLists, Model model) {
-
+		System.out.println(menuLists.toString());
 		List<Menu> menus = new ArrayList<>();
 		for (int i = 0; i < menuLists.length; i++) {
 			menus.addAll(menuService.SearchMenu(menuLists[i]));
