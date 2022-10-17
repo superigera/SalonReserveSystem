@@ -17,6 +17,7 @@ import com.example.service.MenuService;
 
 @Controller
 @RequestMapping("/reserve")
+//@SessionAttributes(types = Menu.class)
 public class ReserveController {
 
 	@Autowired
@@ -48,15 +49,24 @@ public class ReserveController {
 		for (int i = 0; i < menuLists.length; i++) {
 			menus.addAll(menuService.SearchMenu(menuLists[i]));
 		}
+		System.out.println(menus);
 		model.addAttribute("menus", menus);
 		model.addAttribute("menu", new Menu());
 
 		return "reserve/menu";
 	}
 
-	// 日時選択画面 仮でGET
-	@GetMapping("/date_select")
-	public String date_select() {
+	// 日時選択画面
+	@PostMapping("/date_select")
+	public String date_select(@RequestParam("menu_id") Integer[] menuLists, Model model) {
+		System.out.println(menuLists.toString());
+		List<Menu> menus = new ArrayList<>();
+		for (int i = 0; i < menuLists.length; i++) {
+			menus.addAll(menuService.SearchMenu(menuLists[i]));
+		}
+
+		model.addAttribute("menus", menus);
+		model.addAttribute("menu", new Menu());
 		return "reserve/date_select";
 	}
 
