@@ -12,4 +12,8 @@ public class Menu {
 	private Integer menu_price;
 
 	private Integer menu_times;
+
+	private Integer day;
+
+	private Integer time;
 }

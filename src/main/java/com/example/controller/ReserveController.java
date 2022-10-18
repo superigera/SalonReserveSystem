@@ -70,9 +70,18 @@ public class ReserveController {
 		return "reserve/date_select";
 	}
 
-	// 個人情報入力画面 仮でGET
-	@GetMapping("/input_info")
-	public String input_info() {
+	// 個人情報入力画面
+	@PostMapping("/input_info")
+	public String input_info(Model model, @RequestParam("menu_id") Integer menu_id, @RequestParam("time") Integer time,
+			@RequestParam("day") String day) {
+		System.out.println(menu_id);
+		System.out.println(time);
+		System.out.println(day);
+
+		List<Menu> menus = new ArrayList<>();
+		menus.addAll(menuService.SearchMenu(menu_id));
+		model.addAttribute("menus", menus);
+
 		return "reserve/input_info";
 	}
 
