@@ -51,7 +51,9 @@ div.flex {
 						<td th:text="${menu.menu_name}"></td>
 						<td th:text="${menu.menu_price}"></td>
 						<td th:text="${menu.menu_times}"></td>
-						<td id="day"></td>
+						<td id="day">
+						</td>
+							<input id= days type="hidden" name="day"> 
 						<td>
 							<select name="time">
 								<option value="9">9:00</option>
@@ -66,7 +68,7 @@ div.flex {
 								<option value="19">19:00</option>
 							</select>
 						</td>
-						<input type="hidden" th:name="menu_id" th:value="${menu.menu_id}"> 
+							<input type="hidden" th:name="menu_id" th:value="${menu.menu_id}"> 
 						<td>
 							<button>予約</button>
 						</td>
@@ -97,12 +99,7 @@ div.flex {
 					navLinkDayClick: function(date) {
 						const text = document.getElementById("day").textContent;
 						document.getElementById("day").textContent = `${date.getMonth()+1}月${date.getDate()}日`
-						//document.getElementById("day").setAttribute("value", "" + (date.getMonth()+1) + "," + date.getDate())
-						const input = document.createElement("input");
-						input.setAttribute("type", "hidden");
-						input.setAttribute("name", "day");
-						input.setAttribute("value",  "" + (date.getMonth()+1) + "," + date.getDate());
-						document.getElementById("day").appendChild(input);
+						document.getElementById("days").setAttribute("value", "" + (date.getMonth()+1) + "." + date.getDate());
 					},
 					businessHours : true, 
 					selectable : true,
