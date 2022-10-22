@@ -97,7 +97,7 @@ button {
 								td_times.innerText = menu.menu_times;
 								
 								cancel_button.addEventListener("click", () => {
-									event.target.closest("tr").remove();
+									event.currentTarget.closest("tr").remove();
 								});
 								
 								tr.appendChild(th);

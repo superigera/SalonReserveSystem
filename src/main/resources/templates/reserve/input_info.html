@@ -37,33 +37,36 @@ div.flex {
 					<th>メニュー名　</th>
 					<th>料金　</th>
 					<th>所要時間目安　</th>
-					<th>日時　</th>
+					<th>日付 </th>
+					<th>時間 </th>
 				<tr>
-				<tr>
-					<th></th>
-					<th>test</th>
-					<th>test</th>
-					<th>test</th>
-					<th>test</th>
+				<tr th:each="menu:${menus}">
+					<td></td>
+					<td th:text="${menu.menu_name}"></td>
+					<td th:text="${menu.menu_price}"></td>
+					<td th:text="${menu.menu_times}"></td>
+					<td>[[ ${month} ]]月[[ ${days} ]]日</td>
+					<td>[[ ${time} ]]:00</td>
 				</tr>
 			</table>
-			<form action="/reserve/date_select" method="get">
+			<form action="/reserve/date_select" method="post">
 				<button style="background-color: #ffffff; margin-right: 10px; padding: 10px; border-radius: 10px; ">日時選択に戻る</button>
+				
 			</form>
 		</div>
 
 
 		<!-- 個人情報入力 -->
-		<form action="/reserve/confirm" method="get"
+		<form action="/reserve/confirm" method="post" th:object="${member}"
 			style="display: flex; flex-direction: column; width: 400px; margin:auto; margin-top: 30px; padding-top: 20px; padding-bottom: 40px; padding-left: 30px; padding-right: 30px; background-color: #ffffff; border-radius: 20px; line-height: 35px; ">
 			<h2 style="text-decoration: underline; text-align: center;">　　　　個人情報入力　　　　</h2>
 
 			<label for="name">氏名</label>
-				<input type="text">
+				<input type="text" th:field="*{name}">
 			<label for="email">Email</label>
-				<input type="email">
-			<label for="phobe_number">電話番号</label>
-				<input type="tel"> <br>
+				<input type="email" th:field="*{email}">
+			<label for="phone_number">電話番号</label>
+				<input type="tel" th:field="*{phone_number}"> <br>
 			<button style="background-color: green; color: #ffffff; margin: auto; width: 350px; border-radius: 30px; line-height: 30px;">確認</button>
 			<br>
 			<button style="background: transparent; border: none; margin: auto; width: 350px; border-radius: 30px;">ログインはこちら</button>
