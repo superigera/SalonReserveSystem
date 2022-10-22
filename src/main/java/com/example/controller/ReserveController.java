@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.model.Member;
 import com.example.model.Menu;
 import com.example.service.MemberService;
 import com.example.service.MenuService;
@@ -28,12 +29,11 @@ public class ReserveController {
 
 	// メニュー画面
 	@GetMapping("/new_reserve")
-	public String menu(Model model) {
+	public String menu(Model model, Menu menu) {
 		// メニュー一覧取得
 		List<Menu> menuList = menuService.getMenus();
 		model.addAttribute("menuList", menuList);
 		model.addAttribute("menus", menuList);
-		model.addAttribute("menu", new Menu());
 
 		return "reserve/menu";
 	}
@@ -73,21 +73,25 @@ public class ReserveController {
 	// 個人情報入力画面
 	@PostMapping("/input_info")
 	public String input_info(Model model, @RequestParam("menu_id") Integer menu_id, @RequestParam("time") Integer time,
-			@RequestParam("day") String day) {
-		System.out.println(menu_id);
-		System.out.println(time);
-		System.out.println(day);
+			@RequestParam("day") String day, Member member) {
 
+		int day_index = day.indexOf(".");
+		String month = day.substring(0, 2);
+		String days = day.substring(3);
 		List<Menu> menus = new ArrayList<>();
 		menus.addAll(menuService.SearchMenu(menu_id));
 		model.addAttribute("menus", menus);
+		model.addAttribute("time", time);
+		model.addAttribute("month", month);
+		model.addAttribute("days", days);
 
 		return "reserve/input_info";
 	}
 
-	// 予約確認画面 仮でGET
-	@GetMapping("/confirm")
-	public String confirm() {
+	// 予約確認画面
+	@PostMapping("/confirm")
+	public String confirm(Member member) {
+		System.out.println(member);
 		return "reserve/confirm";
 	}
 }
