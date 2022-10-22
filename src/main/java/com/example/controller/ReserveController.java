@@ -18,7 +18,6 @@ import com.example.service.MenuService;
 
 @Controller
 @RequestMapping("/reserve")
-//@SessionAttributes(types = Menu.class)
 public class ReserveController {
 
 	@Autowired
@@ -40,7 +39,7 @@ public class ReserveController {
 
 	// メニュー画面 検索
 	@PostMapping("/search")
-	public String menu_search(@RequestParam("menu_id") Integer[] menuLists, Model model) {
+	public String menu_search(@RequestParam("menu_id") Integer[] menuLists, Model model, Menu menu) {
 		// メニュー一覧取得
 		List<Menu> menuList = menuService.getMenus();
 		model.addAttribute("menuList", menuList);
@@ -51,14 +50,13 @@ public class ReserveController {
 		}
 		System.out.println(menus);
 		model.addAttribute("menus", menus);
-		model.addAttribute("menu", new Menu());
 
 		return "reserve/menu";
 	}
 
 	// 日時選択画面
 	@PostMapping("/date_select")
-	public String date_select(@RequestParam("menu_id") Integer[] menuLists, Model model) {
+	public String date_select(@RequestParam("menu_id") Integer[] menuLists, Model model, Menu menu) {
 		System.out.println(menuLists.toString());
 		List<Menu> menus = new ArrayList<>();
 		for (int i = 0; i < menuLists.length; i++) {
@@ -66,7 +64,6 @@ public class ReserveController {
 		}
 
 		model.addAttribute("menus", menus);
-		model.addAttribute("menu", new Menu());
 		return "reserve/date_select";
 	}
 
