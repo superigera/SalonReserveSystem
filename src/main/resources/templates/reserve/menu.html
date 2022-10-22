@@ -23,28 +23,27 @@ button {
 </head>
 <body>
 	<div layout:fragment="content">
-		<!-- メニュー -->
+		<!-- 検索 -->
 		<form action="/reserve/search" method="post" th:object="${menu}" style="display: flex; background-color: #ffffff; border-radius: 10px;margin-top: 30px; width: 500px; justify-content: space-between;">
 			<p>メニュー</p>
 			<label th:each="menu_item:${menuList}">
 				<input type="checkbox" name="check_menu" th:text="${menu_item.menu_name}" th:value="${menu_item.menu_id}" th:field=*{menu_id}>
 			</label>
-			<button>検索</button>
+			<button type="submit">検索</button>
 		</form>
 		
 		<!-- 選択しているメニュー -->
-		<form action="/reserve/date_select" method="post" th:object="${menu}" style="display: flex; background-color: #ffffff; border-radius: 10px; margin-top: 30px; width: 900px; justify-content: space-between;" >
+		<form action="/reserve/date_select" method="post" style="display: flex; background-color: #ffffff; border-radius: 10px; margin-top: 30px; width: 900px; justify-content: space-between;" >
 			<table border="3" id="add_menus">
 				<tr>		
 					<th>選択しているメニュー</th>
 					<th>メニュー名　</th>
 					<th>料金　</th>
 					<th>所要時間目安　</th>
-					<th>　　　　　</th>
+					<th style="width: 85px"></th>
 				</tr>
-
 			</table>
-				<button style="height: 70px">選択しているメニューで予約する</button>
+				<button type="submit" style="height: 70px">選択しているメニューで予約する</button>
 		</form>
 		
 		<!-- メニュー一覧 -->
@@ -63,11 +62,12 @@ button {
 				<td style="text-align: center;">
 					<form action="/reserve/date_select" method="post">	
 						<input type="hidden" th:name="menu_id" th:value="${menu.menu_id}"> 			
-						<button>予約</button>
+						<button type="submit">予約</button>
 					</form>
 				</td>
 				<td style="text-align: center;">
-					<button th:onclick="|add_menu('__${menu.menu_id}__')|">追加</button>
+					<!-- ボタン押下時選択しているメニューにJSで追加  -->
+					<button type="submit" th:onclick="|add_menu('__${menu.menu_id}__')|">追加</button>
 				</td>				
 				
 				<script th:inline="javascript">
@@ -111,8 +111,6 @@ button {
 								
 							}
 						})
-						
-
 					}
 				</script>
 			</tr>
