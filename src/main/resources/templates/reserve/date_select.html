@@ -54,27 +54,30 @@ button {
 					<th></th>
 				<tr>
 				<form action="/reserve/input_info" method="post" th:object="${menu}">
-					<tr th:each="menu_item:${menus}">
-						<input type="hidden" th:name="menu_id" th:value="${menu_item.menu_id}"> 
+					<tr th:each="menu_item:${menu}">
 						<td></td>
+							<input type="hidden" th:field="${menu.menu_id}" th:value="${menu.menu_id}"> 
 						<td th:text="${menu_item.menu_name}"></td>
+							<input type="hidden" th:field="${menu.menu_name}" th:value="${menu.menu_name}"> 
 						<td th:text="${menu_item.menu_price}"></td>
+							<input type="hidden" th:field="${menu.menu_price}" th:value="${menu.menu_price}"> 
 						<td th:text="${menu_item.menu_times}"></td>
+							<input type="hidden" th:field="${menu.menu_times}" th:value="${menu.menu_times}"> 
 						<td id="day">
 						</td>
 						<input id= days type="hidden" name="day"> 
 						<td>
 							<select name="time">
-								<option value="9">9:00</option>
-								<option value="10">10:00</option>
-								<option value="11">11:00</option>
-								<option value="12">12:00</option>
-								<option value="13">13:00</option>
-								<option value="15">15:00</option>
-								<option value="16">16:00</option>
-								<option value="17">17:00</option>
-								<option value="18">18:00</option>
-								<option value="19">19:00</option>
+								<option value="9:00">9:00</option>
+								<option value="10:00">10:00</option>
+								<option value="11:00">11:00</option>
+								<option value="12:00">12:00</option>
+								<option value="13:00">13:00</option>
+								<option value="15:00">15:00</option>
+								<option value="16:00">16:00</option>
+								<option value="17:00">17:00</option>
+								<option value="18:00">18:00</option>
+								<option value="19:00">19:00</option>
 							</select>
 						</td>
 						<td>
@@ -109,7 +112,7 @@ button {
 					navLinkDayClick: function(date) {
 						const text = document.getElementById("day").textContent;
 						document.getElementById("day").textContent = `${date.getMonth()+1}月${date.getDate()}日`
-						document.getElementById("days").setAttribute("value", "" + (date.getMonth()+1) + ":" + date.getDate());
+						document.getElementById("days").setAttribute("value", "" + (date.getMonth()+1) + "." + date.getDate());
 					},
 					businessHours : true, 
 					selectable : true,

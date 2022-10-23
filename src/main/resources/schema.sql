@@ -12,6 +12,8 @@ create table if not exists reservations(
 	non_member_nane varchar(50),
 	non_member_email varchar(50),
 	non_member_phone_number varchar(50),
+	reserve_days varchar(50),
+	reserve_time varchar(50),
 	date_up date
 );
 

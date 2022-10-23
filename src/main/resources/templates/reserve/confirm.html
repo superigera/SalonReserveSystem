@@ -12,7 +12,8 @@ body {
 	background-size: cover;
 }
 
-input {
+.readonly {
+	border-style:solid;
 	border-radius: 30px;
 	line-height: 30px;
 	width: 350px;
@@ -39,36 +40,38 @@ div.flex {
 					<th>料金　</th>
 					<th>所要時間目安　</th>
 					<th>日時　</th>
+					<th>時間 </th>
 				<tr>
-				<tr>
-					<th></th>
-					<th>test</th>
-					<th>test</th>
-					<th>test</th>
-					<th>test</th>
-				</tr>
+					<tr th:each="menu_item:${menu}">
+						<td></td>
+						<td th:text="${menu_item.menu_name}"></td>
+						<td th:text="${menu_item.menu_price}"></td>
+						<td th:text="${menu_item.menu_times}"></td>
+						<td>[[ ${month} ]]月[[ ${days} ]]日</td>
+						<td>[[ ${time} ]]</td>
+					</tr>
 			</table>
 			<form action="/reserve/input_info" method="get">
-				<button style="background-color: #ffffff; margin-right: 10px; padding: 10px; border-radius: 10px; ">個人情報入力に戻る</button>
+				<button type="submit" style="background-color: #ffffff; margin-right: 10px; padding: 10px; border-radius: 10px; ">個人情報入力に戻る</button>
 			</form>
 		</div>
 
 
 		<!-- 個人情報入力 -->
-		<form action="/top" method="get"
+		<form action="/top" method="get" th:object="${nonMember}"
 			style="display: flex; flex-direction: column; width: 400px; margin:auto; margin-top: 30px; padding-top: 20px; padding-bottom: 40px; padding-left: 30px; padding-right: 30px; background-color: #ffffff; border-radius: 20px; line-height: 35px;">
 			<h2 style="text-decoration: underline; text-align: center;">　　　　予約確認　　　　</h2>
 
 			<label for="name">氏名</label>
-				<input type="text">
+				<div class="readonly">[[ *{non_member_name} ]]</div>
 			<label for="email">Email</label>
-				<input type="email">
+				<div class="readonly">[[ *{non_member_email} ]]</div>
 			<label for="phobe_number">電話番号</label>
-				<input type="tel">
-				<p style="display: flex; justify-content: flex-start;">
-					<input type="checkbox" name="confirm" value="確認" style="width: initial; margin: 0; line-height: 30px;" >　確認しました
-				</p>
-			<button style="background-color: green; color: #ffffff; margin: auto; width: 350px; border-radius: 30px; line-height: 30px;">確認</button>
+				<div class="readonly">[[ *{non_member_phone_number} ]]</div>
+			<p style="display: flex; justify-content: flex-start;">
+				<input type="checkbox" name="confirm" value="確認" style="width: initial; margin: 0; line-height: 30px;" >　確認しました
+			</p>
+			<button type="submit" style="background-color: green; color: #ffffff; margin: auto; width: 350px; border-radius: 30px; line-height: 30px;">確認</button>
 			
 		</form>
 	</div>

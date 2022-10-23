@@ -7,12 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.model.Member;
 import com.example.model.Menu;
+import com.example.model.NonMember;
 import com.example.service.MemberService;
 import com.example.service.MenuService;
 
@@ -56,28 +57,22 @@ public class ReserveController {
 
 	// 日時選択画面
 	@PostMapping("/date_select")
-	public String date_select(@RequestParam("menu_id") Integer[] menuLists, Model model, Menu menu) {
-		System.out.println(menuLists.toString());
-		List<Menu> menus = new ArrayList<>();
-		for (int i = 0; i < menuLists.length; i++) {
-			menus.addAll(menuService.SearchMenu(menuLists[i]));
-		}
+	public String date_select(Model model, @ModelAttribute Menu menu) {
 
-		model.addAttribute("menus", menus);
 		return "reserve/date_select";
 	}
 
 	// 個人情報入力画面
 	@PostMapping("/input_info")
-	public String input_info(Model model, @RequestParam("menu_id") Integer menu_id, @RequestParam("time") Integer time,
-			@RequestParam("day") String day, Member member) {
-
+	public String input_info(Model model, @ModelAttribute Menu menu, @RequestParam("time") String time,
+			@RequestParam("day") String day, NonMember nonMember) {
+		System.out.println(menu);
 		int day_index = day.indexOf(".");
 		String month = day.substring(0, 2);
 		String days = day.substring(3);
-		List<Menu> menus = new ArrayList<>();
-		menus.addAll(menuService.SearchMenu(menu_id));
-		model.addAttribute("menus", menus);
+//		List<Menu> menus = new ArrayList<>();
+//		menus.addAll(menuService.SearchMenu(menu_id));
+//		model.addAttribute("menus", menus);
 		model.addAttribute("time", time);
 		model.addAttribute("month", month);
 		model.addAttribute("days", days);
@@ -87,8 +82,13 @@ public class ReserveController {
 
 	// 予約確認画面
 	@PostMapping("/confirm")
-	public String confirm(Member member) {
-		System.out.println(member);
+	public String confirm(Model model, @ModelAttribute Menu menu, NonMember nonMember,
+			@RequestParam("month") String month, @RequestParam("time") String time, @RequestParam("days") String days) {
+
+		model.addAttribute("time", time);
+		model.addAttribute("month", month);
+		model.addAttribute("days", days);
+
 		return "reserve/confirm";
 	}
 }

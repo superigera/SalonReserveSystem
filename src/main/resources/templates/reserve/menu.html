@@ -60,8 +60,11 @@ button {
 				<td th:text="${menu.menu_price}"></td>
 				<td th:text="${menu.menu_times}"></td>
 				<td style="text-align: center;">
-					<form action="/reserve/date_select" method="post">	
-						<input type="hidden" th:name="menu_id" th:value="${menu.menu_id}"> 			
+					<form action="/reserve/date_select" method="post" th:object="${menu}">	
+						<input type="hidden" th:name="menu_id" th:value="*{menu_id}">
+						<input type="hidden" th:name="menu_name" th:value="*{menu_name}">
+						<input type="hidden" th:name="menu_price" th:value="*{menu_price}">
+						<input type="hidden" th:name="menu_times" th:value="*{menu_times}"> 			
 						<button type="submit">予約</button>
 					</form>
 				</td>
