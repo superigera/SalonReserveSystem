@@ -16,6 +16,7 @@ import com.example.model.Menu;
 import com.example.model.NonMember;
 import com.example.service.MemberService;
 import com.example.service.MenuService;
+import com.example.service.ReservationsService;
 
 @Controller
 @RequestMapping("/reserve")
@@ -27,9 +28,12 @@ public class ReserveController {
 	@Autowired
 	MenuService menuService;
 
+	@Autowired
+	ReservationsService reservationsService;
+
 	// メニュー画面
 	@GetMapping("/new_reserve")
-	public String menu(Model model, Menu menu) {
+	public String menu(Model model) {
 		// メニュー一覧取得
 		List<Menu> menuList = menuService.getMenus();
 		model.addAttribute("menuList", menuList);
@@ -40,7 +44,7 @@ public class ReserveController {
 
 	// メニュー画面 検索
 	@PostMapping("/search")
-	public String menu_search(@RequestParam("menu_id") Integer[] menuLists, Model model, Menu menu) {
+	public String menu_search(Model model, @RequestParam(name = "menu_id", defaultValue = "") Integer[] menuLists) {
 		// メニュー一覧取得
 		List<Menu> menuList = menuService.getMenus();
 		model.addAttribute("menuList", menuList);
@@ -91,4 +95,16 @@ public class ReserveController {
 
 		return "reserve/confirm";
 	}
+
+	// DB登録
+	@PostMapping("/reserve_register")
+	public String reserve_register(Model model, @RequestParam("month") String month, @RequestParam("time") String time,
+			@RequestParam("days") String days, NonMember nonMember, @RequestParam("menu_id") String menu_id) {
+		System.out.println(menu_id);
+		String reserve_day = month + "-" + days;
+		reservationsService.reservations(menu_id, nonMember.getNon_member_name(), nonMember.getNon_member_email(),
+				nonMember.getNon_member_phone_number(), reserve_day, time);
+		return "top/top";
+	}
+
 }
