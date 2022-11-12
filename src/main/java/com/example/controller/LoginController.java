@@ -59,6 +59,8 @@ public class LoginController {
 		List<Reserve> ReserveList = reserveService.findTodayReserve(today);
 		model.addAttribute("ReserveList", ReserveList);
 		model.addAttribute("time", time);
+		System.out.println(time);
+		System.out.println(ReserveList);
 
 		return "login/admin";
 	}
@@ -67,8 +69,13 @@ public class LoginController {
 	@PostMapping("/admin_search")
 	public String admin_sarch(Model model, @RequestParam("search_day") String search_day,
 			@RequestParam("search_name") String search_name) {
-
 		search_day = search_day.replace("-", "");
+
+		// 日付取得
+		Date d = new Date();
+		SimpleDateFormat d2 = new SimpleDateFormat("Hmm");
+		String time = d2.format(d);
+		model.addAttribute("time", time);
 
 		// 検索予約取得
 		List<Reserve> ReserveList = reserveService.findSearchReserve(search_day, search_name);

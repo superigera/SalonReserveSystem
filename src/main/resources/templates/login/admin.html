@@ -57,7 +57,7 @@ div.flex {
 				<th style="width: 100px"></th>
 			</tr>
 			<tr th:each="reserve : ${ReserveList}">
-				<p th:if="${reserve.reserve_time} > time">
+				<p th:if="${reserve.reserve_time} > ${time}">
 					<td th:text="${reserve.non_member_name}"></td>
 					<td th:text="${reserve.reserve_days}"></td>
 					<td th:text="${reserve.reserve_time}"></td>
@@ -67,7 +67,7 @@ div.flex {
 						<button th:onclick="|reserve_cancel('__${reserve.reservations_id}__')|">キャンセル</button>
 					</td>
 				</p>
-				<p th:if="${reserve.reserve_time} < time">
+				<p th:if="${reserve.reserve_time} < ${time}">
 					<td th:text="${reserve.non_member_name}" style="background-color:grey"></td>
 					<td th:text="${reserve.reserve_days}" style="background-color:grey"></td>
 					<td th:text="${reserve.reserve_time}" style="background-color:grey"></td>
