@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 public interface ReservationsMapper {
 
 	// 予約登録
-	public void reserve(@Param("menu_id") String id, @Param("non_member_nane") String name,
+	public void reserve(@Param("menu_id") String id, @Param("non_member_name") String name,
 			@Param("non_member_email") String email, @Param("non_member_phone_number") String number,
 			@Param("reserve_days") String date, @Param("reserve_time") String time);
 }

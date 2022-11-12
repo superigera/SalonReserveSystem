@@ -8,7 +8,7 @@
 	<insert id="reserve">
 		insert into reservations(
 	 	menu_id,
-	 	non_member_nane,
+	 	non_member_name,
 		non_member_email,
 		non_member_phone_number,
 		reserve_days,
@@ -16,7 +16,7 @@
 		)
 		values(
 		#{menu_id},
-		#{non_member_nane},
+		#{non_member_name},
 		#{non_member_email},
 		#{non_member_phone_number},
 		#{reserve_days},
