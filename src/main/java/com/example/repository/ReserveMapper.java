@@ -14,7 +14,7 @@ public interface ReserveMapper {
 	public List<Reserve> findTodayReserve(String today);
 
 	// 検索予約取得
-	public List<Reserve> findSearchReserve(String today);
+	public List<Reserve> findSearchReserve(String day, String name);
 
 	// 予約登録
 	public void reserve(@Param("menu_id") String id, @Param("non_member_name") String name,

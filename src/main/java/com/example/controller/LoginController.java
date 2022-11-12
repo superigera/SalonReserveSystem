@@ -65,12 +65,10 @@ public class LoginController {
 	public String admin_sarch(Model model, @RequestParam("search_day") String search_day,
 			@RequestParam("search_name") String search_name) {
 
-		System.out.println(search_name);
-
-		String day = search_day.replace("-", "");
+		search_day = search_day.replace("-", "");
 
 		// 検索予約取得
-		List<Reserve> ReserveList = reserveService.findSearchReserve(day);
+		List<Reserve> ReserveList = reserveService.findSearchReserve(search_day, search_name);
 		model.addAttribute("ReserveList", ReserveList);
 
 		return "login/admin";
