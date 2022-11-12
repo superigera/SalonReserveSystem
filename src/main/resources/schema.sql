@@ -9,7 +9,7 @@ create table if not exists reservations(
 	reservations_id varchar(50) primary key AUTO_INCREMENT,
 	menu_id varchar(50),
 	member_id varchar(50),
-	non_member_nane varchar(50),
+	non_member_name varchar(50),
 	non_member_email varchar(50),
 	non_member_phone_number varchar(50),
 	reserve_days varchar(50),

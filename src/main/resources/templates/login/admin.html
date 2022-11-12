@@ -1,14 +1,69 @@
 <!DOCTYPE html>
-<html xmlns:th="www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<style>
+
+body {
+	background-image:
+		url("https://boccitabi.net/photostock/wp-content/uploads/2021/04/4472830_s_1024.jpg");
+	background-size: cover;
+}
+
+</style>
 </head>
 <body>
-	<h1>アドミン画面</h1>
+	<div layout:fragment="content">
+	
+	<!-- 予約検索 -->
+	<form action="/login_page/admin_search" method="post"  style="display: flex; background-color: #ffffff; border-radius: 10px;margin-top: 30px; width: 500px; justify-content: space-between;">
+		<p>予約一覧</p>
+		<label>
+			<input type="date" name="search_day">
+			<input type="search" name="search_name" placeholder="氏名を入力">
+		</label>
+		<button>検索</button>
+	</form>
+	
+	<!-- 予約一覧 -->
+			<table border="2" style="background-color: #ffffff; width: 1500px; margin: auto; line-height: 50px; margin-top: 30px;">
+			<tr>
+				<th>氏名</th>
+				<th>日付</th>
+				<th>時間</th>
+				<th>メニュー</th>
+				<th>所要時間</th>
+				<th></th>
+			</tr>
+			<tr th:each="reserve : ${ReserveList}">
+				<td th:text="${reserve.non_member_name}"></td>
+				<td th:text="${reserve.reserve_days}"></td>
+				<td th:text="${reserve.reserve_time}"></td>
+				<td th:text="${reserve.menu_name}"></td>
+				<td th:text="${reserve.menu_times}"></td>
+				<td>
+					<button th:onclick="|reserve_cancel('__${reserve.reservations_id}__')|">キャンセル</button>
+				</td>
+				
+				<!-- JS -->
+				<script th:inline="javascript">
+					function reserve_cancel(reservations_id){
+						if(confirm("予約をキャンセルして宜しいですか？")){
+							//controllerではなくJSでSQL　ajax?
+						}
+					};
+				</script>
+			</tr>
+		</table>
+	
+	
 	
 	<!-- 仮でGET -->
-	<form action="/login_page/reserve_register" method="get">
+	<form action="/login_page/register" method="get">
 		<button>予約登録　</button>
 	</form>
 </body>
