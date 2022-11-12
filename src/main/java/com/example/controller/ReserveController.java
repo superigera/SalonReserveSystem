@@ -16,7 +16,7 @@ import com.example.model.Menu;
 import com.example.model.NonMember;
 import com.example.service.MemberService;
 import com.example.service.MenuService;
-import com.example.service.ReservationsService;
+import com.example.service.ReserveService;
 
 @Controller
 @RequestMapping("/reserve")
@@ -29,7 +29,7 @@ public class ReserveController {
 	MenuService menuService;
 
 	@Autowired
-	ReservationsService reservationsService;
+	ReserveService reserveService;
 
 	// メニュー画面
 	@GetMapping("/new_reserve")
@@ -102,7 +102,7 @@ public class ReserveController {
 			@RequestParam("days") String days, NonMember nonMember, @RequestParam("menu_id") String menu_id) {
 		System.out.println(menu_id);
 		String reserve_day = month + "-" + days;
-		reservationsService.reservations(menu_id, nonMember.getNon_member_name(), nonMember.getNon_member_email(),
+		reserveService.reservations(menu_id, nonMember.getNon_member_name(), nonMember.getNon_member_email(),
 				nonMember.getNon_member_phone_number(), reserve_day, time);
 		return "top/top";
 	}

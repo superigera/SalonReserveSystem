@@ -91,13 +91,10 @@ public class LoginController {
 	public String reserve_register(Model model, Reserve reserve, @RequestParam("menu_id") String menu_id,
 			@RequestParam("reserve_date") String reserve_date, @RequestParam("time") String time) {
 		reserve_date = reserve_date.replace("-", "");
-		System.out.println(menu_id);
-		System.out.println(reserve_date);
-		System.out.println(reserve);
-		System.out.println(time);
+		reserveService.reservations(menu_id, reserve.getNon_member_name(), null, reserve.getNon_member_phone_number(),
+				reserve_date, time);
 
-		// admin関数を呼ぶ
-		return "login/admin";
+		return "redirect:/login_page/admin";
 	}
 
 }

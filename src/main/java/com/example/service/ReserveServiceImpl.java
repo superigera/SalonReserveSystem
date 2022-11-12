@@ -24,4 +24,10 @@ public class ReserveServiceImpl implements ReserveService {
 		return mapper.findSearchReserve(day);
 	}
 
+	@Override
+	public void reservations(String id, String name, String email, String number, String date, String time) {
+
+		mapper.reserve(id, name, email, number, date, time);
+	}
+
 }
