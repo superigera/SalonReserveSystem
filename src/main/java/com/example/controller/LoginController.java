@@ -51,11 +51,14 @@ public class LoginController {
 		// 日付取得
 		Date d = new Date();
 		SimpleDateFormat d1 = new SimpleDateFormat("yyyyMMdd");
+		SimpleDateFormat d2 = new SimpleDateFormat("Hmm");
 		String today = d1.format(d);
+		String time = d2.format(d);
 
 		// 本日予約全件取得
 		List<Reserve> ReserveList = reserveService.findTodayReserve(today);
 		model.addAttribute("ReserveList", ReserveList);
+		model.addAttribute("time", time);
 
 		return "login/admin";
 	}
