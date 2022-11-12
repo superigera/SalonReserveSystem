@@ -24,4 +24,23 @@
 		order by reserve_days,reserve_time desc
 	</select>
 	
+	<!-- 予約登録 -->
+	<insert id="reserve">
+		insert into reservations(
+	 	menu_id,
+	 	non_member_name,
+		non_member_email,
+		non_member_phone_number,
+		reserve_days,
+		reserve_time
+		)
+		values(
+		#{menu_id},
+		#{non_member_name},
+		#{non_member_email},
+		#{non_member_phone_number},
+		#{reserve_days},
+		#{reserve_time}
+		)
+	</insert>
 </mapper>
