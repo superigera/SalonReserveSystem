@@ -1,21 +1,53 @@
 <!DOCTYPE html>
-<html xmlns:th="www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<style>
+body {
+	background-image:
+		url("https://boccitabi.net/photostock/wp-content/uploads/2021/04/4472830_s_1024.jpg");
+	background-size: cover;
+}
+
+input {
+	border-radius: 30px;
+	line-height: 30px;
+	width: 350px;
+	border-radius: 30px;
+	margin: auto;
+}
+</style>
 </head>
 <body>
-	<h1>ログイン画面</h1>
-	
-	<!-- 取り敢えずボタンで分ける -->
-	<!-- 仮でGET -->
-	<form action="/login_page/mypage" method="get">
-		<button>マイページ</button>
-	</form>
-	
-	<!-- 仮でGET -->
-	<form action="/login_page/admin" method="get">
-		<button>アドミン</button>
-	</form>
+	<div layout:fragment="content">
+
+		<!-- ログイン -->
+		<form action="#" method="get"
+			style="display: flex; flex-direction: column; width: 400px; margin: auto; margin-top: 150px; padding-top: 20px; padding-bottom: 40px; padding-left: 30px; padding-right: 30px; background-color: #ffffff; border-radius: 20px; line-height: 35px;">
+			<h2 style="text-decoration: underline; text-align: center;">
+				ログイン</h2>
+			<label for="email">Email</label> <input type="email"> <label
+				for="password">パスワード</label> <input type="password"> <br>
+			<button
+				style="background-color: green; color: #ffffff; margin: auto; width: 350px; border-radius: 30px; line-height: 30px;">ログイン</button>
+			<br>
+		</form>
+
+		<!-- 仮でGET -->
+		<form action="/login_page/mypage" method="get">
+			<button>マイページ</button>
+		</form>
+
+		<!-- 仮でGET -->
+		<form action="/login_page/admin" method="get">
+			<button>アドミン</button>
+		</form>
+
+
+	</div>
 </body>
 </html>

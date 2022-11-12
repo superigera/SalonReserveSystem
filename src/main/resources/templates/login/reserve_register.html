@@ -1,15 +1,72 @@
 <!DOCTYPE html>
-<html xmlns:th="www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<style>
+body {
+	background-image:
+		url("https://boccitabi.net/photostock/wp-content/uploads/2021/04/4472830_s_1024.jpg");
+	background-size: cover;
+}
+
+input {
+	border-radius: 30px;
+	line-height: 30px;
+	width: 350px;
+	border-radius: 30px;
+	margin: auto;
+}
+
+select {
+	border-radius: 30px;
+	height: 40px;
+	width: 350px;
+	border-radius: 30px;
+	margin: auto;
+}
+
+</style>
 </head>
 <body>
-	<h1>予約登録画面</h1>
-	
-	<!-- 仮でGET -->
-	<form action="/login_page/admin" method="get">
-		<button>登録　</button>
-	</form>
+	<div layout:fragment="content">
+
+		<form action="/login_page/reserve_register" method="post" th:object="${reserve}"
+			style="display: flex; flex-direction: column; width: 400px; margin: auto; margin-top: 30px; padding-top: 20px; padding-bottom: 20px; padding-left: 30px; padding-right: 30px; background-color: #ffffff; border-radius: 20px; line-height: 35px;">
+			<h2 style="text-decoration: underline; text-align: center;">
+				予約登録</h2>
+			<label for="non_member_name">氏名</label> 
+				<input type="text" th:field="*{non_member_name}"><br>
+			<label for="non_member_phone_number">電話番号</label>
+				<input type="tel" th:field="*{non_member_phone_number}"><br>
+			<label for="menu_id">メニュー</label>
+				<select name="menu_id" id="menu_id">
+					<option th:each="menu : ${menuList}" value="3">[[${menu.menu_name}]]</option>
+				</select>			
+			<br>
+			<label for="reserve_date">日付</label> 
+				<input type="date" name="reserve_date" id="reserve_date">
+			<br>
+			<label for="time">時間</label> 
+				<select name="time">
+					<option value="9">9:00</option>
+					<option value="10">10:00</option>
+					<option value="11">11:00</option>
+					<option value="12">12:00</option>
+					<option value="13">13:00</option>
+					<option value="15">15:00</option>
+					<option value="16">16:00</option>
+					<option value="17">17:00</option>
+					<option value="18">18:00</option>
+					<option value="19">19:00</option>
+				</select>
+			<br>
+			<button style="background-color: green; color: #ffffff; margin: auto; width: 350px; border-radius: 30px; line-height: 30px;">登録</button>
+			<br>
+		</form>
+	</div>
 </body>
 </html>
