@@ -10,7 +10,7 @@ public interface ReserveService {
 	public List<Reserve> findTodayReserve(String today);
 
 	// 検索予約取得
-	public List<Reserve> findSearchReserve(String today);
+	public List<Reserve> findSearchReserve(String today, String name);
 
 	// 予約登録
 	public void reservations(String id, String name, String email, String number, String date, String time);

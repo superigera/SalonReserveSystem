@@ -20,8 +20,8 @@ public class ReserveServiceImpl implements ReserveService {
 	}
 
 	@Override
-	public List<Reserve> findSearchReserve(String day) {
-		return mapper.findSearchReserve(day);
+	public List<Reserve> findSearchReserve(String day, String name) {
+		return mapper.findSearchReserve(day, name);
 	}
 
 	@Override
