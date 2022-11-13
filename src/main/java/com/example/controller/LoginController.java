@@ -3,6 +3,7 @@ package com.example.controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.application.UserApplicationService;
 import com.example.model.Menu;
 import com.example.model.Reserve;
 import com.example.service.MenuService;
@@ -27,6 +29,9 @@ public class LoginController {
 	@Autowired
 	MenuService menuService;
 
+	@Autowired
+	private UserApplicationService userApplicationService;
+
 	// ログイン画面
 	@GetMapping("/input_login")
 	public String login() {
@@ -41,7 +46,9 @@ public class LoginController {
 
 	// 個人情報更新画面
 	@GetMapping("/update_info")
-	public String update_info() {
+	public String update_info(Model model) {
+		Map<String, Integer> genderMap = userApplicationService.getGenderMap();
+		model.addAttribute("genderMap", genderMap);
 		return "login/update_info";
 	}
 
