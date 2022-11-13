@@ -1,15 +1,82 @@
 <!DOCTYPE html>
-<html xmlns:th="www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<style>
+
+body {
+	background-image:
+		url("https://boccitabi.net/photostock/wp-content/uploads/2021/04/4472830_s_1024.jpg");
+	background-size: cover;
+}
+
+button {
+	border: solid;
+	border-color: #80a491;
+	border-radius: 10px;
+	background: transparent;
+	color: #80a491;
+}
+
+div.flex {
+	display: flex;
+	justify-content: space-between;
+}
+
+</style>
 </head>
 <body>
-	<h1>マイページ</h1>
+	<div layout:fragment="content">
+	<div class="flex"  style="display: flex; margin-top: 30px; margin-left: 30px; border-radius: 10px;">
+		<!-- 直近予約 -->
+		<form action="#" method="get"  style="display: flex; background-color: #ffffff; border-radius: 10px;margin-top: 0px; width: 500px; justify-content: space-between;">
+			<table border="2" style="background-color: #ffffff; width: 1500px; margin: auto; line-height: 50px; margin-top: 0px;">
+				<tr>
+					<th>予約リスト</th>
+					<th>日付</th>
+					<th>時間</th>
+					<th>メニュー</th>
+					<th>所要時間</th>
+					<th>店舗連絡</th>
+					<th style="width: 85px"></th>
+				</tr>
+				<tr>
+					<td>test</td>
+					<td>test</td>
+					<td>test</td>
+					<td>test</td>
+					<td>test</td>
+					<td>test</td>
+					<td>
+						<button>キャンセル</button>					
+					</td>
+				</tr>
+			</table>
+		</form>
+		<!-- 個人情報更新ボタン -->
+		<form action="/login_page/update_info" method="get">
+			<button type="submit" style="background-color: #ffffff; margin-right: 10px; padding: 10px; border-radius: 10px; ">個人情報更新</button>
+		</form>
+	</div>
+	<!-- 過去の予約一覧 -->
+		<table border="2" style="background-color: #ffffff; width: 1500px; margin: auto; line-height: 50px; margin-top: 30px;">
+			<tr>
+				<th>日付</th>
+				<th>時間</th>
+				<th>メニュー</th>
+				<th>所要時間</th>
+			</tr>
+			<tr>
+				<td>test</td>
+				<td>test</td>
+				<td>test</td>
+				<td>test</td>
+			</tr>
+		</table>
 	
-	<!-- 仮でGET -->
-	<form action="/login_page/update_info" method="get">
-		<button>個人情報更新</button>
-	</form>
 </body>
 </html>
