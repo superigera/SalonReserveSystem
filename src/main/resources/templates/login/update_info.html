@@ -1,15 +1,49 @@
 <!DOCTYPE html>
-<html xmlns:th="www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+<link th:href="@{/css/temp.css}" rel="stylesheet">
+<title></title>
+</style>
+</head>        
 <body>
-	<h1>個人情報更新画面</h1>
-	
-	<!-- 仮でGET -->
-	<form action="/login_page/mypage" method="get">
-		<button>更新</button>
-	</form>
+	<div layout:fragment="content">
+
+		<!-- 個人情報入力 -->
+		<form action="/login_page/mypage" method="get"
+			style="display: flex; flex-direction: column; width: 400px; margin:auto; margin-top: 30px; padding-top: 20px; padding-bottom: 40px; padding-left: 30px; padding-right: 30px; background-color: #ffffff; border-radius: 20px; line-height: 35px; ">
+			<h2 style="text-decoration: underline; text-align: center;">　　　　個人情報更新　　　　</h2>
+
+			<label for="name">氏名</label>
+				<input type="text">
+				
+			<label for="email">Email</label>
+				<input type="email">
+				
+			<label for="phobe_number">電話番号</label>
+				<input type="tel">
+				
+			<label for="age">年齢</label>
+				<input type="number">
+				
+			<label for="gender">性別</label>
+			<div style="display:flex; justify-content: space-between;">
+                <div th:each="item:${genderMap}" >
+                    <input type="radio" th:value="${item.value}" th:text="${item.key}" style="width: 80px;">
+                </div>
+			</div>
+			<label for="password">パスワード</label>
+				<input type="password">
+			<label for="confirm_password">パスワード確認</label>
+				<input type="password">
+				 <br>
+			<button style="background-color: green; color: #ffffff; margin: auto; width: 350px;">更新</button>
+			<br>
+		</form>
+	</div>
+
+
 </body>
 </html>
