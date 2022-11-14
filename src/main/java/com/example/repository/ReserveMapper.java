@@ -16,6 +16,9 @@ public interface ReserveMapper {
 	// 検索予約取得
 	public List<Reserve> findSearchReserve(String day, String name);
 
+	// 予約キャンセル
+	public void cancelReserve(String cancel_id);
+
 	// 予約登録
 	public void reserve(@Param("menu_id") String id, @Param("non_member_name") String name,
 			@Param("non_member_email") String email, @Param("non_member_phone_number") String number,

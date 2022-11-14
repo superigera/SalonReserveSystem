@@ -25,6 +25,11 @@
 		order by reserve_days,reserve_time desc
 	</select>
 	
+	<!-- 予約キャンセル -->
+	<delete id="cancelReserve">
+		delete from reservations where reservations_id = #{cancel_id}
+	</delete>
+	
 	<!-- 予約登録 -->
 	<insert id="reserve">
 		insert into reservations(

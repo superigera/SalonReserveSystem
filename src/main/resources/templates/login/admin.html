@@ -80,8 +80,12 @@ div.flex {
 				<script th:inline="javascript">
 					function reserve_cancel(reservations_id){
 						if(confirm("予約をキャンセルして宜しいですか？")){
-							//controllerではなくJSでSQL　ajax?
-							
+							const form = document.createElement('form');
+							form.method = 'post';
+							form.action = '/login_page/admin_cancel'
+							form.innerHTML = '<input name="cancel_id" value='+ reservations_id +'>'
+							document.body.append(form);
+							form.submit();
 						}
 					};
 				</script>
