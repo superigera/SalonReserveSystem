@@ -11,7 +11,7 @@
 		inner join menu
 		on reservations.menu_id = menu.menu_id
 		where reserve_days = #{day}
-		order by reserve_days,reserve_time desc
+		order by reserve_days,reserve_time asc
 	</select>
 	
 	<!-- 検索予約取得 -->
