@@ -91,6 +91,16 @@ public class LoginController {
 		return "login/admin";
 	}
 
+	// アドミン画面キャンセル
+	@PostMapping("/admin_cancel")
+	public String admin_cancel(Model model, @RequestParam("cancel_id") String cancel_id) {
+
+		// 予約キャンセル
+		reserveService.cancelReserve(cancel_id);
+
+		return "login/admin";
+	}
+
 	// 予約登録画面
 	@GetMapping("/register")
 	public String register(Model model, Reserve reserve) {

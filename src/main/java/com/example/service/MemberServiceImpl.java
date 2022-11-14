@@ -14,7 +14,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void signup(Member member) {
-		// TODO 自動生成されたメソッド・スタブ
+
 		mapper.insertOne(member);
 	}
 
