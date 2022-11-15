@@ -69,41 +69,51 @@ public class ReserveController {
 	// 個人情報入力画面
 	@PostMapping("/input_info")
 	public String input_info(Model model, @ModelAttribute Menu menu, @RequestParam("time") String time,
-			@RequestParam("day") String day, NonMember nonMember) {
-		System.out.println(menu);
-		int day_index = day.indexOf(".");
-		String month = day.substring(0, 2);
-		String days = day.substring(3);
+			@RequestParam("reserve_date") String reserve_date, NonMember nonMember) {
+		StringBuilder sb_time = new StringBuilder();
+		sb_time.append(time);
+		sb_time.insert(2, ":");
+		String year = reserve_date.substring(0, 4);
+		String month = reserve_date.substring(4, 6);
+		String day = reserve_date.substring(6);
 //		List<Menu> menus = new ArrayList<>();
 //		menus.addAll(menuService.SearchMenu(menu_id));
 //		model.addAttribute("menus", menus);
-		model.addAttribute("time", time);
+		model.addAttribute("time", sb_time);
+		model.addAttribute("year", year);
 		model.addAttribute("month", month);
-		model.addAttribute("days", days);
-
+		model.addAttribute("days", day);
+		model.addAttribute("reserve_date", reserve_date);
+		model.addAttribute("reserve_time", time);
 		return "reserve/input_info";
 	}
 
 	// 予約確認画面
 	@PostMapping("/confirm")
 	public String confirm(Model model, @ModelAttribute Menu menu, NonMember nonMember,
-			@RequestParam("month") String month, @RequestParam("time") String time, @RequestParam("days") String days) {
-
+			@RequestParam("reserve_date") String reserve_date, @RequestParam("reserve_time") String reserve_time,
+			@RequestParam("time") String time) {
+		String year = reserve_date.substring(0, 4);
+		String month = reserve_date.substring(4, 6);
+		String day = reserve_date.substring(6);
 		model.addAttribute("time", time);
+		model.addAttribute("year", year);
 		model.addAttribute("month", month);
-		model.addAttribute("days", days);
+		model.addAttribute("days", day);
+		model.addAttribute("reserve_date", reserve_date);
+		model.addAttribute("reserve_time", reserve_time);
 
 		return "reserve/confirm";
 	}
 
 	// DB登録
 	@PostMapping("/reserve_register")
-	public String reserve_register(Model model, @RequestParam("month") String month, @RequestParam("time") String time,
-			@RequestParam("days") String days, NonMember nonMember, @RequestParam("menu_id") String menu_id) {
+	public String reserve_register(Model model, @RequestParam("reserve_time") String reserve_time,
+			@RequestParam("reserve_date") String reserve_date, NonMember nonMember,
+			@RequestParam("menu_id") String menu_id) {
 		System.out.println(menu_id);
-		String reserve_day = month + "-" + days;
 		reserveService.reservations(menu_id, nonMember.getNon_member_name(), nonMember.getNon_member_email(),
-				nonMember.getNon_member_phone_number(), reserve_day, time);
+				nonMember.getNon_member_phone_number(), reserve_date, reserve_time);
 		return "top/top";
 	}
 
