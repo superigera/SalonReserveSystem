@@ -65,19 +65,19 @@ button {
 							<input type="hidden" th:field="${menu.menu_times}" th:value="${menu.menu_times}"> 
 						<td id="day">
 						</td>
-						<input id= days type="hidden" name="day"> 
+						<input id= reserve_date type="hidden" name="reserve_date"> 
 						<td>
 							<select name="time">
-								<option value="9:00">9:00</option>
-								<option value="10:00">10:00</option>
-								<option value="11:00">11:00</option>
-								<option value="12:00">12:00</option>
-								<option value="13:00">13:00</option>
-								<option value="15:00">15:00</option>
-								<option value="16:00">16:00</option>
-								<option value="17:00">17:00</option>
-								<option value="18:00">18:00</option>
-								<option value="19:00">19:00</option>
+								<option value="0900">9:00</option>
+								<option value="1000">10:00</option>
+								<option value="1100">11:00</option>
+								<option value="1200">12:00</option>
+								<option value="1300">13:00</option>
+								<option value="1500">15:00</option>
+								<option value="1600">16:00</option>
+								<option value="1700">17:00</option>
+								<option value="1800">18:00</option>
+								<option value="1900">19:00</option>
 							</select>
 						</td>
 						<td>
@@ -111,9 +111,9 @@ button {
 					//カレンダーの日付押下時に選択しているメニューへ日付を追加
 					navLinkDayClick: function(date) {
 						const text = document.getElementById("day").textContent;
-						document.getElementById("day").textContent = `${date.getMonth()+1}月${date.getDate()}日`
-						document.getElementById("days").setAttribute("value", "" + (date.getMonth()+1) + "." + date.getDate());
-					},
+						document.getElementById("day").textContent = `${date.getFullYear()}年${("0"+(date.getMonth()+1)).slice(-2)}月${("0"+date.getDate()).slice(-2)}日`
+						document.getElementById("reserve_date").setAttribute("value", "" + (date.getFullYear())　+ ("0"+(date.getMonth()+1)).slice(-2) + ("0"+date.getDate()).slice(-2));
+					},   
 					businessHours : true, 
 					selectable : true,
 		
