@@ -34,7 +34,12 @@ public class LoginController {
 
 	// ログイン画面
 	@GetMapping("/input_login")
-	public String login() {
+	public String getLogin() {
+		return "login/login";
+	}
+
+	@PostMapping("/input_login")
+	public String postLogin() {
 		return "login/login";
 	}
 
