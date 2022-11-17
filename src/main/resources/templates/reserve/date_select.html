@@ -53,7 +53,7 @@ button {
 					<th>時間</th>
 					<th></th>
 				<tr>
-				<form action="/reserve/input_info" method="post" th:object="${menu}">
+				<form th:action="@{/reserve/input_info}" method="post" th:object="${menu}">
 					<tr th:each="menu_item:${menu}">
 						<td></td>
 							<input type="hidden" th:field="${menu.menu_id}" th:value="${menu.menu_id}"> 
@@ -87,7 +87,7 @@ button {
 				</form>
 			</table>
 			<!-- 戻るボタン -->
-			<form action="/reserve/new_reserve" method="get">
+			<form th:action="@{/reserve/new_reserve}" method="get">
 				<button type="submit" style="background-color: #ffffff; margin-right: 10px; padding: 10px; border-radius: 10px; ">メニュー選択に戻る</button>
 			</form>
 		</div>

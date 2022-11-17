@@ -33,7 +33,7 @@ div.flex {
 	<div layout:fragment="content">
 	<div class="flex"  style="display: flex; margin-top: 30px; margin-left: 30px; border-radius: 10px;">
 		<!-- 予約検索 -->
-		<form action="/login_page/admin_search" method="post"  style="display: flex; background-color: #ffffff; border-radius: 10px;margin-top: 0px; width: 500px; justify-content: space-between;">
+		<form th:action="@{/login_page/admin_search}" method="post"  style="display: flex; background-color: #ffffff; border-radius: 10px;margin-top: 0px; width: 500px; justify-content: space-between;">
 			<p>予約一覧</p>
 			<label>
 				<input type="date" name="search_day">
@@ -42,7 +42,7 @@ div.flex {
 			<button>検索</button>
 		</form>
 			<!-- 予約登録ボタン -->
-		<form action="/login_page/register" method="get">
+		<form th:action="@{/login_page/register}" method="get">
 			<button type="submit" style="background-color: #ffffff; margin-right: 10px; padding: 10px; border-radius: 10px; ">予約登録</button>
 		</form>
 	</div>

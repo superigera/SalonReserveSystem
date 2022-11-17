@@ -51,14 +51,14 @@ div.flex {
 						<td>[[ ${time} ]]</td>
 					</tr>
 			</table>
-			<form action="/reserve/input_info" method="get">
+			<form th:action="@{/reserve/input_info}" method="get">
 				<button type="submit" style="background-color: #ffffff; margin-right: 10px; padding: 10px; border-radius: 10px; ">個人情報入力に戻る</button>
 			</form>
 		</div>
 
 
 		<!-- 個人情報入力 -->
-		<form action="/reserve/reserve_register" method="post" th:object="${nonMember}"
+		<form th:action="@{/reserve/reserve_register}" method="post" th:object="${nonMember}"
 			style="display: flex; flex-direction: column; width: 400px; margin:auto; margin-top: 30px; padding-top: 20px; padding-bottom: 40px; padding-left: 30px; padding-right: 30px; background-color: #ffffff; border-radius: 20px; line-height: 35px;">
 			<h2 style="text-decoration: underline; text-align: center;">　　　　予約確認　　　　</h2>
 
