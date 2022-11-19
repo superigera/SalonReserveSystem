@@ -21,7 +21,6 @@ public class AuthenticationSuccessHandler
 
 		Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
 
-		System.out.println(roles);
 		if (roles.contains("ROLE_ADMIN")) {
 			response.sendRedirect(request.getContextPath() + "/login_page/admin");
 		} else if (roles.contains("ROLE_USER")) {
