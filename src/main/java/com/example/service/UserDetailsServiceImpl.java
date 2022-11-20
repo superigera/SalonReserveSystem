@@ -24,13 +24,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		try {
-			String sql = "SELECT * FROM user WHERE name = ?";
+			String sql = "SELECT * FROM members WHERE email = ?";
 			Map<String, Object> map = jdbcTemplate.queryForMap(sql, username);
 			String password = (String) map.get("password");
 			Collection<GrantedAuthority> authorities = new ArrayList<>();
 			authorities.add(new SimpleGrantedAuthority((String) map.get("authority")));
 			return new UserDetailsImpl(username, password, authorities);
 		} catch (Exception e) {
+			System.out.println(e);
 			throw new UsernameNotFoundException("user not found.", e);
 		}
 	}
