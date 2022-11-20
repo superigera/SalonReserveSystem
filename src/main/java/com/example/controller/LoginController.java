@@ -35,6 +35,7 @@ public class LoginController {
 	// ログイン画面
 	@GetMapping("/input_login")
 	public String getLogin() {
+		System.out.println("test");
 		return "login/login";
 	}
 
