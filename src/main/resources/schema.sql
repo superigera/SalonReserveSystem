@@ -1,10 +1,10 @@
+
 CREATE TABLE IF NOT EXISTS menu (
   menu_id VARCHAR(50) PRIMARY KEY AUTO_INCREMENT,
   menu_name VARCHAR(50),
   menu_price INT,
   menu_times INT
 );
-
 create table if not exists reservations(
 	reservations_id varchar(50) primary key AUTO_INCREMENT,
 	menu_id varchar(50),
@@ -24,18 +24,9 @@ create table if not exists members(
 	phone_number varchar(50),
 	age Integer,
 	gender Integer,
-	password varchar(50),
+	password varchar(100),
 	created_at date,
 	update_at date,
 	logical_delete_flag boolean,
-	role_id boolean
-);
-
-
-create table if not exists user
-(
-   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-   name VARCHAR(100) NOT NULL UNIQUE,
-   password VARCHAR(100) NOT NULL,
-   authority VARCHAR(100)
+	authority VARCHAR(100)
 );

@@ -13,7 +13,8 @@
 		phone_number,
 		age,
 		gender,
-		password
+		password,
+		authority
 		)
 		values(
 		#{member_id},
@@ -22,7 +23,8 @@
 		#{phone_number},
 		#{age},
 		#{gender},
-		#{password}
+		#{password},
+		#{authority}
 		)
 	</insert>
 	
