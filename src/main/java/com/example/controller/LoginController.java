@@ -5,7 +5,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,9 +15,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.UserDetailsImpl;
 import com.example.application.UserApplicationService;
+import com.example.model.Member;
 import com.example.model.Menu;
 import com.example.model.Reserve;
+import com.example.service.MemberService;
 import com.example.service.MenuService;
 import com.example.service.ReserveService;
 
@@ -32,10 +37,15 @@ public class LoginController {
 	@Autowired
 	private UserApplicationService userApplicationService;
 
+	@Autowired
+	MemberService memberService;
+
+	@Autowired
+	private ModelMapper modelMapper;
+
 	// ログイン画面
 	@GetMapping("/input_login")
 	public String getLogin() {
-		System.out.println("test");
 		return "login/login";
 	}
 
@@ -46,16 +56,27 @@ public class LoginController {
 
 	// マイページ画面
 	@GetMapping("/mypage")
-	public String mypage() {
+	public String mypage(@AuthenticationPrincipal UserDetailsImpl userDetails) {
 		return "login/mypage";
 	}
 
 	// 個人情報更新画面
 	@GetMapping("/update_info")
-	public String update_info(Model model) {
+	public String update_info(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+		Member member_info_list = memberService.findMember(Integer.parseInt(userDetails.getMember_id()));
+		System.out.println(member_info_list);
+		model.addAttribute("member_info_list", member_info_list);
 		Map<String, Integer> genderMap = userApplicationService.getGenderMap();
 		model.addAttribute("genderMap", genderMap);
 		return "login/update_info";
+	}
+
+	// DB更新
+	@PostMapping("/update_info")
+	public String update(Model model, Member member_list_info, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+		Member member = modelMapper.map(member_list_info, Member.class);
+		memberService.updateMember(member);
+		return "login/mypage";
 	}
 
 	// アドミン画面

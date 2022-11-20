@@ -12,35 +12,37 @@
 	<div layout:fragment="content">
 
 		<!-- 個人情報入力 -->
-		<form th:action="@{/login_page/mypage}" method="get"
+		<form th:action="@{/login_page/update_info}" method="post"
 			style="display: flex; flex-direction: column; width: 400px; margin:auto; margin-top: 30px; padding-top: 20px; padding-bottom: 40px; padding-left: 30px; padding-right: 30px; background-color: #ffffff; border-radius: 20px; line-height: 35px; ">
 			<h2 style="text-decoration: underline; text-align: center;">　　　　個人情報更新　　　　</h2>
 
 			<label for="name">氏名</label>
-				<input type="text">
+				<input type="text" name="name" th:value="${member_info_list.name}">
 				
 			<label for="email">Email</label>
-				<input type="email">
+				<input type="email" name="email" th:value="${member_info_list.email}">
 				
 			<label for="phobe_number">電話番号</label>
-				<input type="tel">
+				<input type="tel" name="phone_number" th:value="${member_info_list.phone_number}">
 				
 			<label for="age">年齢</label>
-				<input type="number">
+				<input type="number" name="age" th:value="${member_info_list.age}">
 				
 			<label for="gender">性別</label>
 			<div style="display:flex; justify-content: space-between;">
                 <div th:each="item:${genderMap}" >
-                    <input type="radio" th:value="${item.value}" th:text="${item.key}" style="width: 80px;">
+                    <input type="radio" name="gender" th:value="${item.value}" th:text="${item.key}" style="width: 80px;">
                 </div>
 			</div>
 			<label for="password">パスワード</label>
-				<input type="password">
+				<input type="password" name="password" th:value="${#strings.toString(member_info_list.password)}">
 			<label for="confirm_password">パスワード確認</label>
-				<input type="password">
+				<input type="password" th:value="${#strings.toString(member_info_list.password)}">
 				 <br>
 			<button style="background-color: green; color: #ffffff; margin: auto; width: 350px;">更新</button>
 			<br>
+			<input type="hidden" name="member_id" th:value="${member_info_list.member_id}">
+			<input type="hidden" name="authority" th:value="${member_info_list.authority}">
 		</form>
 	</div>
 

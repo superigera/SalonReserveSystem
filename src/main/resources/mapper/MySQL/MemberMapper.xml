@@ -28,4 +28,22 @@
 		)
 	</insert>
 	
+	<!-- メンバー情報取得 -->
+	<select id="findMember" resultType="com.example.model.Member">
+		select * from members where member_id = #{member_id}
+	</select>
+	
+	<!-- 個人情報更新 -->
+	<update id="updateMember">
+		update members set 
+		name = #{member.name},
+		email = #{member.email},
+		phone_number = #{member.phone_number},
+		age = #{member.age},
+		gender = #{member.gender},
+		password = #{member.password},
+		authority = #{member.authority}
+		where member_id = #{member.member_id}
+	</update>
+	
 </mapper>

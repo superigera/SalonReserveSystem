@@ -10,11 +10,14 @@ public class UserDetailsImpl implements UserDetails {
 	private String username;
 	private String password;
 	private Collection<GrantedAuthority> authorities;
+	private String member_id;
 
-	public UserDetailsImpl(String username, String password, Collection<GrantedAuthority> authorities) {
+	public UserDetailsImpl(String username, String password, Collection<GrantedAuthority> authorities,
+			String member_id) {
 		this.username = username;
 		this.password = password;
 		this.authorities = authorities;
+		this.member_id = member_id;
 	}
 
 	// 権限リストを返す
@@ -33,6 +36,11 @@ public class UserDetailsImpl implements UserDetails {
 	@Override
 	public String getUsername() {
 		return username;
+	}
+
+	// メンバーIDを返す
+	public String getMember_id() {
+		return member_id;
 	}
 
 	// アカウントの有効期限の判定
