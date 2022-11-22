@@ -35,4 +35,14 @@ public class ReserveServiceImpl implements ReserveService {
 		mapper.reserve(id, name, email, number, date, time);
 	}
 
+	@Override
+	public List<Reserve> findReserve(String member_id, String today) {
+		return mapper.findReserve(member_id, today);
+	}
+
+	@Override
+	public List<Reserve> findPastReserve(String member_id, String today) {
+		return mapper.findPastReserve(member_id, today);
+	}
+
 }

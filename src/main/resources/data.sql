@@ -12,7 +12,15 @@ insert into reservations(menu_id,member_id,non_member_name,non_member_email,non_
 ('3',null,'屋比久','test3@test.com','12345678901',20221024,'0900'),
 ('2',null,'北井','test4@test.com','23456789012',20221026,1100),
 ('1',null,'平山','test5@test.com','34567890123',20221101,1100),
-('1',null,'早川','test6@test.com','45678901234',20230105,1100);
+('1',null,'早川','test6@test.com','45678901234',20230105,1100),
+('1',1,'user','user@test.com','00000000000',20221024,1000),
+('1',1,'user','user@test.com','00000000000',20221027,1300),
+('1',1,'user','user@test.com','00000000000',20221025,1000),
+('1',1,'user','user@test.com','00000000000',20221026,1300),
+('1',1,'user','user@test.com','00000000000',20221124,1000),
+('1',1,'user','user@test.com','00000000000',20221127,1300),
+('1',2,'admin','admin@test.com','00000000000',20221024,1000),
+('1',2,'admin','admin@test.com','00000000000',20221127,1300);
 
 
 insert into members(name,email,password,authority)values

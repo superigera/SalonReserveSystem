@@ -25,6 +25,16 @@
 		order by reserve_days,reserve_time desc
 	</select>
 	
+	<!-- 直近予約取得 -->
+	<select id="findReserve" resultType="com.example.model.Reserve">
+		select * from reservations where #{today} <![CDATA[ <= ]]> reserve_days and member_id = #{member_id}
+	</select>
+	
+	<!-- 過去予約取得 -->
+	<select id="findPastReserve" resultType="com.example.model.Reserve">
+		select * from reservations where #{today} <![CDATA[ > ]]> reserve_days and member_id = #{member_id} order by reserve_days asc
+	</select>
+	
 	<!-- 予約キャンセル -->
 	<delete id="cancelReserve">
 		delete from reservations where reservations_id = #{cancel_id}
