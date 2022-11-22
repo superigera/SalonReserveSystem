@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -56,7 +57,39 @@ public class LoginController {
 
 	// マイページ画面
 	@GetMapping("/mypage")
-	public String mypage(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+	public String mypage(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+		// 日付取得
+		Date d = new Date();
+		SimpleDateFormat d1 = new SimpleDateFormat("yyyyMMdd");
+		String today = d1.format(d);
+
+		List<Reserve> ReserveList = reserveService.findReserve(userDetails.getMember_id(), today);
+		model.addAttribute("ReserveList", ReserveList);
+
+		List<Reserve> pastReserveList = reserveService.findPastReserve(userDetails.getMember_id(), today);
+		model.addAttribute("pastReserveList", pastReserveList);
+
+		// メニュー取得
+		List<Menu> menus = new ArrayList<>();
+		for (Reserve reserve : ReserveList) {
+			menus.addAll(menuService.SearchMenu(reserve.getMenu_id()));
+		}
+		System.out.println(menus);
+
+		model.addAttribute("menus", menus);
+
+		return "login/mypage";
+	}
+
+	// マイページ画面キャンセル
+	@PostMapping("/mypage_cancel")
+	public String mypage_cancel(Model model, @RequestParam("cancel_id") String cancel_id) {
+
+		System.out.println(cancel_id);
+		System.out.println("test");
+		// 予約キャンセル
+		reserveService.cancelReserve(cancel_id);
+
 		return "login/mypage";
 	}
 
@@ -64,7 +97,6 @@ public class LoginController {
 	@GetMapping("/update_info")
 	public String update_info(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) {
 		Member member_info_list = memberService.findMember(Integer.parseInt(userDetails.getMember_id()));
-		System.out.println(member_info_list);
 		model.addAttribute("member_info_list", member_info_list);
 		Map<String, Integer> genderMap = userApplicationService.getGenderMap();
 		model.addAttribute("genderMap", genderMap);
@@ -122,6 +154,8 @@ public class LoginController {
 	@PostMapping("/admin_cancel")
 	public String admin_cancel(Model model, @RequestParam("cancel_id") String cancel_id) {
 
+		System.out.println(cancel_id);
+		System.out.println("test");
 		// 予約キャンセル
 		reserveService.cancelReserve(cancel_id);
 

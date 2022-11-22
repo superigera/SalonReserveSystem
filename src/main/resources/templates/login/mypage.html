@@ -33,10 +33,10 @@ div.flex {
 	<div layout:fragment="content">
 	<div class="flex"  style="display: flex; margin-top: 30px; margin-left: 30px; border-radius: 10px;">
 		<!-- 直近予約 -->
-		<form th:action="@{/login_page/update_info}" method="get"  style="display: flex; background-color: #ffffff; border-radius: 10px;margin-top: 0px; width: 500px; justify-content: space-between;">
-			<table border="2" style="background-color: #ffffff; width: 1500px; margin: auto; line-height: 50px; margin-top: 0px;">
+		<div style="display: flex; background-color: #ffffff; border-radius: 10px;margin-top: 0px; width: 500px; justify-content: space-between;">
+			<table border="2" style="background-color: #ffffff; width: 1500px; margin: auto; line-height: 10px; margin-top: 0px;">
 				<tr>
-					<th>予約リスト</th>
+					<th style="width: 100px;">予約リスト</th>				
 					<th>日付</th>
 					<th>時間</th>
 					<th>メニュー</th>
@@ -44,19 +44,22 @@ div.flex {
 					<th>店舗連絡</th>
 					<th style="width: 85px"></th>
 				</tr>
-				<tr>
-					<td>test</td>
-					<td>test</td>
-					<td>test</td>
-					<td>test</td>
-					<td>test</td>
-					<td>test</td>
+				<tr th:each="reserve : ${ReserveList}">
+					<td></td>
+					<td th:text="${#strings.substring(reserve.reserve_days,0,4) + '年' + #strings.substring(reserve.reserve_days,4,6) + '月' + #strings.substring(reserve.reserve_days,6,8) + '日'}"></td>
+					<td th:text="${#strings.substring(reserve.reserve_time,0,2) + ':' + #strings.substring(reserve.reserve_time,2,4)}"></td>
+				<td>メニュー</td>
+				<td>所要時間</td>
+					<td th:text="000-0000-0000"></td>
 					<td>
-						<button>キャンセル</button>					
+						<form th:action="@{/login_page/mypage_cancel}" method="post" onSubmit="return confirm('予約をキャンセルして宜しいですか？')">
+							<input type="submit" value="cancel">
+							<input type="hidden" name="cancel_id" th:value="${reserve.reservations_id}">				
+						</form>
 					</td>
 				</tr>
 			</table>
-		</form>
+		</div>
 		<!-- 個人情報更新ボタン -->
 		<form th:action="@{/login_page/update_info}" method="get">
 			<button type="submit" style="background-color: #ffffff; margin-right: 10px; padding: 10px; border-radius: 10px; ">個人情報更新</button>
@@ -70,11 +73,11 @@ div.flex {
 				<th>メニュー</th>
 				<th>所要時間</th>
 			</tr>
-			<tr>
-				<td>test</td>
-				<td>test</td>
-				<td>test</td>
-				<td>test</td>
+			<tr th:each="reserve : ${pastReserveList}">
+				<td th:text="${#strings.substring(reserve.reserve_days,0,4) + '年' + #strings.substring(reserve.reserve_days,4,6) + '月' + #strings.substring(reserve.reserve_days,6,8) + '日'}"></td>
+				<td th:text="${#strings.substring(reserve.reserve_time,0,2) + ':' + #strings.substring(reserve.reserve_time,2,4)}"></td>
+				<td>メニュー</td>
+				<td>所要時間</td>
 			</tr>
 		</table>
 	
