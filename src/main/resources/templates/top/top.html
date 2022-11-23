@@ -2,32 +2,112 @@
 <html xmlns:th="www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link th:href="@{/css/top.css}" rel="stylesheet">
+<title>TOPページ</title>
 <style>
 body {
-	margin: 40px 10px;
+	background-image:
+		url("../img/back_bokashi.jpg");
+	background-size: cover;
+	margin: 0;
 	padding: 0;
-	font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-	font-size: 14px;
 }
+
+.container {
+	display: flex;
+	justify-content: flex-end;
+}
+
+button {
+	border: solid;
+	border-color: #80a491;
+	border-radius: 10px;
+	background: transparent;
+	color: #80a491;
+}
+
+#img{
+    background: black;
+    color: white;
+    border-radius: 1em;
+    padding: 1em;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+iframe{
+	width: 60%;
+	margin-right: 100px;
+}
+
 </style>
 </head>
 <body>
-	<h1>Top</h1>
-	<form action="/reserve/new_reserve" method="get">
-		<button>予約する</button>
-	</form>
-
-	<form action="/register/new_register" method="get">
-		<button>新規登録</button>
-	</form>
-
-	<form action="/login_page/input_login" method="get">
-		<button>ログイン</button>
-	</form>
-
-	<form action="/reserve/new_reserve" method="get">
-		<button>予約はこちらから</button>
-	</form>
+	<!-- ヘッダー -->
+	<nav>
+		<div style="display: flex; justify-content: space-between; background-color: #ffffff; margin: 0; padding: 0">
+			<img alt="アイコン" src="https://www.pokemon.co.jp/ex/dungeonDX/t/images/icon/icon_psyduck.png" style="margin-left:10px; width: 80px" >
+			<div class="container">
+				<form th:action="@{/reserve/new_reserve}" method="get">
+					<button style="font-size:20px; width: 150px; margin-top: 25px; border: none; background: transparent;">予約する</button>
+				</form>
+				<form th:action="@{/register/new_register}" method="get">
+					<button style="font-size:20px; width: 150px; margin-top: 25px; border: none; background: transparent;">新規登録</button>
+				</form>
+				<form th:action="@{/login_page/input_login}" method="get">
+					<button style="font-size:20px; width: 150px; margin-top: 25px; border: none; background: transparent;">ログイン</button>
+				</form>
+			</div>
+		</div>
+	</nav>
+	
+	<!-- カットイメージ -->
+	<img id="img" style="width:800px; height:250px;">	
+	
+	<!-- 予約 -->
+	<div style="margin-top: 350px; text-align: right; margin-right: 100px;">
+		<form th:action="@{/reserve/new_reserve}" method="get">
+			<button style="font-size:25px; width: 250px; margin-top: -50px;">予約はこちらから</button>
+		</form>
+	</div>
+	
+	<!-- 会社情報 -->
+	<div style="display: flex; justify-content:space-between; margin-top: 10px;">
+		<p style="margin-left: 100px;">
+			<strong>会社名</strong><br>
+			住所：〒410-8541<br>
+			静岡県沼津市東椎路 字東荒301-3<br>
+			電話：000-0000-000<br>
+			営業時間：9:00~19:00<br>
+			休日：なし
+		</p>
+	
+	<!-- Map -->
+		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3263.512829783434!2d138.83806981524344!3d35.11887388032916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6019853694d0d8f5%3A0x68cd807e1a8c33bd!2z44KJ44KJ44G944O844Go5rK85rSl!5e0!3m2!1sja!2sjp!4v1669188435628!5m2!1sja!2sjp" width="800" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+	</div>
+	
+	<!-- JS -->
+	<script type="text/javascript">
+	const imgList = [
+		 "../img/images.jpg",
+		 "../img/images (1).jpg",
+		 "../img/images (2).jpg"];
+	let num = -1;
+	 
+	function slideshow_timer(){
+	  if (num === 2){
+	    num = 0;
+	  } 
+	  else {
+	    num ++;
+	  }
+	  document.getElementById("img").src = imgList[num];
+	}
+	 
+	setInterval(slideshow_timer, 1500);
+	</script>
 </body>
 </html>
