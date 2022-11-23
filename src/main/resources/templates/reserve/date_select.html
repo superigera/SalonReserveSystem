@@ -110,10 +110,16 @@ button {
 					
 					//カレンダーの日付押下時に選択しているメニューへ日付を追加
 					navLinkDayClick: function(date) {
+						console.log(`${date.getFullYear()}-${("0"+(date.getMonth()+1)).slice(-2)}-${("0"+date.getDate()).slice(-2)}`)
 						const text = document.getElementById("day").textContent;
 						document.getElementById("day").textContent = `${date.getFullYear()}年${("0"+(date.getMonth()+1)).slice(-2)}月${("0"+date.getDate()).slice(-2)}日`
 						document.getElementById("reserve_date").setAttribute("value", "" + (date.getFullYear())　+ ("0"+(date.getMonth()+1)).slice(-2) + ("0"+date.getDate()).slice(-2));
-					},   
+					},validRange: function(nowDate){
+						return{
+		                	start: nowDate							
+						}
+		            },
+					
 					businessHours : true, 
 					selectable : true,
 		
