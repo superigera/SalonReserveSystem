@@ -16,11 +16,11 @@ public interface ReserveService {
 	public void cancelReserve(String cancel_id);
 
 	// 直近予約取得
-	public List<Reserve> findReserve(String member_id, String today);
+	public List<Reserve> findReserve(Integer member_id, String today);
 
 	// 過去予約取得
-	public List<Reserve> findPastReserve(String member_id, String today);
+	public List<Reserve> findPastReserve(Integer member_id, String today);
 
 	// 予約登録
-	public void reservations(String id, String name, String email, String number, String date, String time);
+	public void reservations(Integer id, String name, String email, String number, String date, String time);
 }

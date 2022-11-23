@@ -14,7 +14,8 @@
 		age,
 		gender,
 		password,
-		authority
+		authority,
+		delete_flag
 		)
 		values(
 		#{member_id},
@@ -24,13 +25,14 @@
 		#{age},
 		#{gender},
 		#{password},
-		#{authority}
+		#{authority},
+		0
 		)
 	</insert>
 	
 	<!-- メンバー情報取得 -->
 	<select id="findMember" resultType="com.example.model.Member">
-		select * from members where member_id = #{member_id}
+		select * from members where member_id = #{member_id} and delete_flag = 0
 	</select>
 	
 	<!-- 個人情報更新 -->

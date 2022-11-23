@@ -30,18 +30,18 @@ public class ReserveServiceImpl implements ReserveService {
 	}
 
 	@Override
-	public void reservations(String id, String name, String email, String number, String date, String time) {
+	public void reservations(Integer id, String name, String email, String number, String date, String time) {
 
 		mapper.reserve(id, name, email, number, date, time);
 	}
 
 	@Override
-	public List<Reserve> findReserve(String member_id, String today) {
+	public List<Reserve> findReserve(Integer member_id, String today) {
 		return mapper.findReserve(member_id, today);
 	}
 
 	@Override
-	public List<Reserve> findPastReserve(String member_id, String today) {
+	public List<Reserve> findPastReserve(Integer member_id, String today) {
 		return mapper.findPastReserve(member_id, today);
 	}
 

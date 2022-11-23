@@ -29,7 +29,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 			String password = (String) map.get("password");
 			Collection<GrantedAuthority> authorities = new ArrayList<>();
 			authorities.add(new SimpleGrantedAuthority((String) map.get("authority")));
-			String member_id = (String) map.get("member_id");
+			Integer member_id = (Integer) map.get("member_id");
 			return new UserDetailsImpl(username, password, authorities, member_id);
 		} catch (Exception e) {
 			System.out.println(e);

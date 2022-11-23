@@ -74,7 +74,6 @@ public class LoginController {
 		for (Reserve reserve : ReserveList) {
 			menus.addAll(menuService.SearchMenu(reserve.getMenu_id()));
 		}
-		System.out.println(menus);
 
 		model.addAttribute("menus", menus);
 
@@ -85,18 +84,15 @@ public class LoginController {
 	@PostMapping("/mypage_cancel")
 	public String mypage_cancel(Model model, @RequestParam("cancel_id") String cancel_id) {
 
-		System.out.println(cancel_id);
-		System.out.println("test");
 		// 予約キャンセル
 		reserveService.cancelReserve(cancel_id);
-
-		return "login/mypage";
+		return "redirect:/login_page/mypage";
 	}
 
 	// 個人情報更新画面
 	@GetMapping("/update_info")
 	public String update_info(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) {
-		Member member_info_list = memberService.findMember(Integer.parseInt(userDetails.getMember_id()));
+		Member member_info_list = memberService.findMember(userDetails.getMember_id());
 		model.addAttribute("member_info_list", member_info_list);
 		Map<String, Integer> genderMap = userApplicationService.getGenderMap();
 		model.addAttribute("genderMap", genderMap);
@@ -154,12 +150,10 @@ public class LoginController {
 	@PostMapping("/admin_cancel")
 	public String admin_cancel(Model model, @RequestParam("cancel_id") String cancel_id) {
 
-		System.out.println(cancel_id);
-		System.out.println("test");
 		// 予約キャンセル
 		reserveService.cancelReserve(cancel_id);
+		return "redirect:/login_page/admin";
 
-		return "login/admin";
 	}
 
 	// 予約登録画面
@@ -174,7 +168,7 @@ public class LoginController {
 
 	// DB登録
 	@PostMapping("/reserve_register")
-	public String reserve_register(Model model, Reserve reserve, @RequestParam("menu_id") String menu_id,
+	public String reserve_register(Model model, Reserve reserve, @RequestParam("menu_id") Integer menu_id,
 			@RequestParam("reserve_date") String reserve_date, @RequestParam("time") String time) {
 		reserve_date = reserve_date.replace("-", "");
 		reserveService.reservations(menu_id, reserve.getNon_member_name(), null, reserve.getNon_member_phone_number(),
