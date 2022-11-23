@@ -10,7 +10,7 @@
 		from reservations
 		inner join menu
 		on reservations.menu_id = menu.menu_id
-		where reserve_days = #{day}
+		where reserve_days = #{day} and reservations.delete_flag = 0
 		order by reserve_days,reserve_time asc
 	</select>
 	
@@ -20,25 +20,26 @@
 		from reservations
 		inner join menu
 		on reservations.menu_id = menu.menu_id
-		where reserve_days = #{day}
-		or non_member_name = #{name}
+		where reservations.reserve_days = #{day}
+		or reservations.non_member_name = #{name}
+		and reservations.delete_flag = 0
 		order by reserve_days,reserve_time desc
 	</select>
 	
 	<!-- 直近予約取得 -->
 	<select id="findReserve" resultType="com.example.model.Reserve">
-		select * from reservations where #{today} <![CDATA[ <= ]]> reserve_days and member_id = #{member_id}
+		select * from reservations where #{today} <![CDATA[ <= ]]> reserve_days and member_id = #{member_id} and delete_flag = 0
 	</select>
 	
 	<!-- 過去予約取得 -->
 	<select id="findPastReserve" resultType="com.example.model.Reserve">
-		select * from reservations where #{today} <![CDATA[ > ]]> reserve_days and member_id = #{member_id} order by reserve_days asc
+		select * from reservations where #{today} <![CDATA[ > ]]> reserve_days and member_id = #{member_id} and delete_flag = 0 order by reserve_days asc
 	</select>
 	
 	<!-- 予約キャンセル -->
-	<delete id="cancelReserve">
-		delete from reservations where reservations_id = #{cancel_id}
-	</delete>
+	<update id="cancelReserve">
+		update reservations set delete_flag = 1 where reservations_id = #{cancel_id}
+	</update>
 	
 	<!-- 予約登録 -->
 	<insert id="reserve">
@@ -48,7 +49,8 @@
 		non_member_email,
 		non_member_phone_number,
 		reserve_days,
-		reserve_time
+		reserve_time,
+		delete_flag
 		)
 		values(
 		#{menu_id},
@@ -56,7 +58,8 @@
 		#{non_member_email},
 		#{non_member_phone_number},
 		#{reserve_days},
-		#{reserve_time}
+		#{reserve_time},
+		0
 		)
 	</insert>
 </mapper>

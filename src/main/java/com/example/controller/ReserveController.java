@@ -110,7 +110,7 @@ public class ReserveController {
 	@PostMapping("/reserve_register")
 	public String reserve_register(Model model, @RequestParam("reserve_time") String reserve_time,
 			@RequestParam("reserve_date") String reserve_date, NonMember nonMember,
-			@RequestParam("menu_id") String menu_id) {
+			@RequestParam("menu_id") Integer menu_id) {
 		System.out.println(menu_id);
 		reserveService.reservations(menu_id, nonMember.getNon_member_name(), nonMember.getNon_member_email(),
 				nonMember.getNon_member_phone_number(), reserve_date, reserve_time);

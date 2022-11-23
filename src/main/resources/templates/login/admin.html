@@ -64,7 +64,10 @@ div.flex {
 					<td th:text="${reserve.menu_name}"></td>
 					<td th:text="${reserve.menu_times} + '分'"></td>
 					<td>
-						<button th:onclick="|reserve_cancel('__${reserve.reservations_id}__')|">キャンセル</button>
+						<form th:action="@{/login_page/admin_cancel}" method="post" onSubmit="return confirm('予約をキャンセルして宜しいですか？')">
+							<button type="submit">キャンセル</button>
+							<input type="hidden" name="cancel_id" th:value="${reserve.reservations_id}">				
+						</form>
 					</td>
 				</p>
 				<p th:if="${reserve.reserve_time} < ${time}">
@@ -75,21 +78,6 @@ div.flex {
 					<td th:text="${reserve.menu_times} + '分'" style="background-color:grey"></td>
 					<td style="background-color:grey"></td>
 				</p>
-				
-				<!-- JS -->
-				<script th:inline="javascript">
-					function reserve_cancel(reservations_id){
-						if(confirm("予約をキャンセルして宜しいですか？")){
-							const form = document.createElement('form');
-							form.method = 'post';
-							form.action = '/login_page/admin_cancel'
-							form.innerHTML = '<input name="cancel_id" value='+ reservations_id +'>'
-							document.body.append(form);
-							console.log(form);
-							form.submit();
-						}
-					};
-				</script>
 			</tr>
 		</table>
 	

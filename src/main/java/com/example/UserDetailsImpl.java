@@ -10,10 +10,10 @@ public class UserDetailsImpl implements UserDetails {
 	private String username;
 	private String password;
 	private Collection<GrantedAuthority> authorities;
-	private String member_id;
+	private Integer member_id;
 
 	public UserDetailsImpl(String username, String password, Collection<GrantedAuthority> authorities,
-			String member_id) {
+			Integer member_id) {
 		this.username = username;
 		this.password = password;
 		this.authorities = authorities;
@@ -39,7 +39,7 @@ public class UserDetailsImpl implements UserDetails {
 	}
 
 	// メンバーIDを返す
-	public String getMember_id() {
+	public Integer getMember_id() {
 		return member_id;
 	}
 
