@@ -48,8 +48,8 @@ div.flex {
 					<td></td>
 					<td th:text="${#strings.substring(reserve.reserve_days,0,4) + '年' + #strings.substring(reserve.reserve_days,4,6) + '月' + #strings.substring(reserve.reserve_days,6,8) + '日'}"></td>
 					<td th:text="${#strings.substring(reserve.reserve_time,0,2) + ':' + #strings.substring(reserve.reserve_time,2,4)}"></td>
-				<td>メニュー</td>
-				<td>所要時間</td>
+					<td th:text="${reserve.menu_name}"></td>
+					<td th:text="${reserve.menu_times} + '分'"></td>
 					<td th:text="000-0000-0000"></td>
 					<td>
 						<form th:action="@{/login_page/mypage_cancel}" method="post" onSubmit="return confirm('予約をキャンセルして宜しいですか？')">

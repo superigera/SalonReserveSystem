@@ -64,18 +64,20 @@ public class LoginController {
 		String today = d1.format(d);
 
 		List<Reserve> ReserveList = reserveService.findReserve(userDetails.getMember_id(), today);
+		List<Menu> menus = new ArrayList<>();
+		for (Reserve reserve : ReserveList) {
+			menus = menuService.SearchMenu(reserve.getMenu_id());
+			for (Menu menu : menus) {
+				String name = menu.getMenu_name();
+				Integer times = menu.getMenu_times();
+				reserve.setMenu_name(name);
+				reserve.setMenu_times(times);
+			}
+		}
 		model.addAttribute("ReserveList", ReserveList);
 
 		List<Reserve> pastReserveList = reserveService.findPastReserve(userDetails.getMember_id(), today);
 		model.addAttribute("pastReserveList", pastReserveList);
-
-		// メニュー取得
-		List<Menu> menus = new ArrayList<>();
-		for (Reserve reserve : ReserveList) {
-			menus.addAll(menuService.SearchMenu(reserve.getMenu_id()));
-		}
-
-		model.addAttribute("menus", menus);
 
 		return "login/mypage";
 	}
