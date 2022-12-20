@@ -179,6 +179,6 @@ public class LoginController {
 		return "redirect:/login_page/admin";
 	}
 
-	// issue test
+	// issuetest
 
 }
