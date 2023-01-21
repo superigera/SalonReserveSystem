@@ -20,7 +20,8 @@ insert into reservations(menu_id,member_id,non_member_name,non_member_email,non_
 ('2',1,'user','user@test.com','00000000000',20221124,1000,0),
 ('3',1,'user','user@test.com','00000000000',20221127,1300,0),
 ('1',2,'admin','admin@test.com','00000000000',20221024,1000,0),
-('1',2,'admin','admin@test.com','00000000000',20221127,1300,0);
+('1',2,'admin','admin@test.com','00000000000',20221127,1300,0),
+('1',2,'admin','admin@test.com','00000000000',20221226,1300,0);
 
 
 insert into members(name,email,password,authority,delete_flag)values
