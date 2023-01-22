@@ -1,6 +1,8 @@
 package com.example.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -111,9 +113,11 @@ public class ReserveController {
 	public String reserve_register(Model model, @RequestParam("reserve_time") String reserve_time,
 			@RequestParam("reserve_date") String reserve_date, NonMember nonMember,
 			@RequestParam("menu_id") Integer menu_id) {
-		System.out.println(menu_id);
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		String strDate = sdf.format(date);
 		reserveService.reservations(menu_id, nonMember.getNon_member_name(), nonMember.getNon_member_email(),
-				nonMember.getNon_member_phone_number(), reserve_date, reserve_time);
+				nonMember.getNon_member_phone_number(), reserve_date, reserve_time, strDate);
 		return "top/top";
 	}
 

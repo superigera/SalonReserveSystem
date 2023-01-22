@@ -50,6 +50,7 @@
 		non_member_phone_number,
 		reserve_days,
 		reserve_time,
+		date_up,
 		delete_flag
 		)
 		values(
@@ -59,6 +60,7 @@
 		#{non_member_phone_number},
 		#{reserve_days},
 		#{reserve_time},
+		#{date_up},
 		0
 		)
 	</insert>
