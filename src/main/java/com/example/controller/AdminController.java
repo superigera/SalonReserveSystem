@@ -95,6 +95,7 @@ public class AdminController {
 	public String reserve_register(Model model, Reserve reserve, @RequestParam("menu_id") Integer menu_id,
 			@RequestParam("reserve_date") String reserve_date, @RequestParam("time") String time) {
 		reserve_date = reserve_date.replace("-", "");
+
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		String strDate = sdf.format(date);
