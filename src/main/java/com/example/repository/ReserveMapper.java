@@ -28,5 +28,5 @@ public interface ReserveMapper {
 	// 予約登録
 	public void reserve(@Param("menu_id") Integer id, @Param("non_member_name") String name,
 			@Param("non_member_email") String email, @Param("non_member_phone_number") String number,
-			@Param("reserve_days") String date, @Param("reserve_time") String time);
+			@Param("reserve_days") String date, @Param("reserve_time") String time, @Param("date_up") String date_up);
 }

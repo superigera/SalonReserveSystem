@@ -30,9 +30,10 @@ public class ReserveServiceImpl implements ReserveService {
 	}
 
 	@Override
-	public void reservations(Integer id, String name, String email, String number, String date, String time) {
+	public void reservations(Integer id, String name, String email, String number, String date, String time,
+			String date_up) {
 
-		mapper.reserve(id, name, email, number, date, time);
+		mapper.reserve(id, name, email, number, date, time, date_up);
 	}
 
 	@Override

@@ -14,6 +14,7 @@
 		age,
 		gender,
 		password,
+		created_at,
 		authority,
 		delete_flag
 		)
@@ -25,6 +26,7 @@
 		#{age},
 		#{gender},
 		#{password},
+		#{created_at},
 		#{authority},
 		0
 		)
@@ -44,6 +46,7 @@
 		age = #{member.age},
 		gender = #{member.gender},
 		password = #{member.password},
+		update_at = #{member.update_at},
 		authority = #{member.authority}
 		where member_id = #{member.member_id}
 	</update>

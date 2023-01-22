@@ -14,7 +14,7 @@ create table if not exists reservations(
 	non_member_phone_number varchar(50),
 	reserve_days varchar(50),
 	reserve_time varchar(50),
-	date_up date,
+	date_up varchar(50),
 	delete_flag varchar(50)
 );
 
@@ -26,8 +26,8 @@ create table if not exists members(
 	age Integer,
 	gender Integer,
 	password varchar(100),
-	created_at date,
-	update_at date,
+	created_at varchar(50),
+	update_at varchar(50),
 	logical_delete_flag boolean,
 	authority VARCHAR(100),
 	delete_flag varchar(50)

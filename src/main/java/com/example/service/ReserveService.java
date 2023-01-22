@@ -22,5 +22,6 @@ public interface ReserveService {
 	public List<Reserve> findPastReserve(Integer member_id, String today);
 
 	// 予約登録
-	public void reservations(Integer id, String name, String email, String number, String date, String time);
+	public void reservations(Integer id, String name, String email, String number, String date, String time,
+			String date_up);
 }
