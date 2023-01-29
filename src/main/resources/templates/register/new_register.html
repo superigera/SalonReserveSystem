@@ -27,6 +27,9 @@
 			<label for="email">Email</label>
 				<input type="email" th:field="*{email}">
 				<div class="error" th:errors="*{email}"></div>
+				<div th:if="${signupError}">
+		            <div style="color: red;" th:text="${signupError}"></div>
+		        </div>
 				
 			<label for="phobe_number">電話番号</label>
 				<input type="tel" th:field="*{phone_number}">

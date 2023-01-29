@@ -49,7 +49,7 @@ form p {
 				</div>
 			<div>パスワード</div>
 				<p th:text="*{password}"></p>
-			<div><input type="checkbox">確認しました</div>
+			<div><input type="checkbox" name="agree" value="agreement">確認しました</div>
 			<br>
 				<input type="hidden" name="name" th:field="*{name}">
 				<input type="hidden" name="email" th:field="*{email}">
@@ -57,8 +57,31 @@ form p {
 				<input type="hidden" name="age" th:field="*{age}">
 				<input type="hidden" name="gender" th:field="*{gender}">
 				<input type="hidden" name="password" th:field="*{password}">
-			<button style="background-color: green; color: #ffffff; margin: auto; width: 350px;">登録</button>
+			<button id="submitButton" style="background-color: green; color: #ffffff; margin: auto; width: 350px;">登録</button>
 		</form>
+		<script>
+		document.addEventListener('DOMContentLoaded', function(event) {
+			  const targetButton = document.getElementById('submitButton');
+			  const triggerCheckbox = document.querySelector('input[name="agree"]');
+
+			  targetButton.disabled = true;
+			  targetButton.classList.add('is-inactive');
+
+			  triggerCheckbox.addEventListener('change', function() {
+			    if (this.checked) {
+			      targetButton.disabled = false;
+			      targetButton
+			      targetButton.classList.remove('is-inactive');
+			      targetButton.classList.add('is-active');
+			    } else {
+			      targetButton.disabled = true;
+			      targetButton.classList.remove('is-active');
+			      targetButton.classList.add('is-inactive');
+			    }
+			  }, false);
+			}, false);
+		
+		</script>
 	</div>
 
 
