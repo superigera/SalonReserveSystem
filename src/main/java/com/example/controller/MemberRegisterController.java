@@ -18,6 +18,7 @@ import com.example.form.GroupOrder;
 import com.example.form.SignupForm;
 import com.example.model.Member;
 import com.example.service.MemberService;
+import com.example.service.UserDetailsServiceImpl;
 
 @Controller
 @RequestMapping("/register")
@@ -31,6 +32,9 @@ public class MemberRegisterController {
 
 	@Autowired
 	private UserApplicationService userApplicationService;
+
+	@Autowired
+	private UserDetailsServiceImpl userDetailsServiceImpl;
 
 	// 新規登録画面表示
 	@GetMapping("/new_register")
@@ -52,6 +56,10 @@ public class MemberRegisterController {
 		model.addAttribute("password", form.getPassword());
 
 		if (result.hasErrors()) {
+			return newRegister(model, form);
+		}
+		if (userDetailsServiceImpl.isExistUser(form.getEmail())) {
+			model.addAttribute("signupError", "Email： " + form.getEmail() + "は既に登録されています");
 			return newRegister(model, form);
 		}
 

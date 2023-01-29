@@ -37,4 +37,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		}
 	}
 
+	public boolean isExistUser(String email) {
+		String sql = "SELECT COUNT(*) FROM members WHERE email = ?";
+		int count = jdbcTemplate.queryForObject(sql, Integer.class, new Object[] { email });
+		if (count == 0) {
+			return false;
+		}
+		return true;
+	}
+
 }
