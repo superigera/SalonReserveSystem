@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.example.model.Events;
 import com.example.model.Reserve;
 
 @Mapper
@@ -29,4 +30,7 @@ public interface ReserveMapper {
 	public void reserve(@Param("menu_id") Integer id, @Param("non_member_name") String name,
 			@Param("non_member_email") String email, @Param("non_member_phone_number") String number,
 			@Param("reserve_days") String date, @Param("reserve_time") String time);
+
+	// 予約重複チェック
+	public List<Events> reserveDuplicationCheck();
 }

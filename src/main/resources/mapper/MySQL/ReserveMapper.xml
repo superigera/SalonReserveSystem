@@ -62,4 +62,12 @@
 		0
 		)
 	</insert>
+	
+	<!-- 予約重複チェック -->
+	<select id="reserveDuplicationCheck" resultType="com.example.model.Events">
+		select  reserve_days,reserve_time,menu_times
+		from reservations
+		inner join menu
+		on reservations.menu_id = menu.menu_id
+	</select>
 </mapper>

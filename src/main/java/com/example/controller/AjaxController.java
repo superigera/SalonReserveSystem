@@ -3,27 +3,49 @@ package com.example.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.model.Events;
+import com.example.service.ReserveServiceImpl;
+
 @RestController
 public class AjaxController {
+	@Autowired
+	ReserveServiceImpl reserveServiceImpl;
 
 	// ajaxのデータでカレンダーに渡す
 	@GetMapping("/ajax_reserve")
-	public @ResponseBody List<String> ajax_reserve() {
-		List<String> test1 = new ArrayList<>();
-		test1.add("20230130T0900");
-		test1.add("20230131T0900");
+	public @ResponseBody List<Events> ajax_reserve() {
+		List<Events> list = new ArrayList<>();
+		list.addAll(reserveServiceImpl.reserveDuplicationCheck());
 
-		// serveice使ってSQLで下記の形式で取得しリストに代入
-		// endの為にも、menu_idでMENUと結合してtimeも取得
-		// reserve_days + "T" + reserve_time
-		// 上記をreturnし、javascriptでeventsをループする
-		// startは上記、endはstart + time
+		List<Events> test = new ArrayList<>();
 
-		return test1;
+		for (int i = 0; i < list.size(); i++) {
+			Events events = new Events();
+			events.setTitle("不可");
+			events.setStart(list.get(i).getReserve_days() + "T" + list.get(i).getReserve_time());
+
+			String end = "";
+			if (Integer.valueOf(list.get(i).getMenu_times()) >= 60) {
+				int result = Integer.valueOf(list.get(i).getMenu_times()) + 40
+						+ Integer.valueOf(list.get(i).getReserve_time());
+
+				end = Integer.valueOf(result).toString();
+			} else {
+				int result = Integer.valueOf(list.get(i).getMenu_times())
+						+ Integer.valueOf(list.get(i).getReserve_time());
+				end = Integer.valueOf(result).toString();
+			}
+			events.setEnd(list.get(i).getReserve_days() + "T" + end);
+
+			test.add(events);
+		}
+
+		return test;
 	}
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.model.Events;
 import com.example.model.Reserve;
 import com.example.repository.ReserveMapper;
 
@@ -43,6 +44,11 @@ public class ReserveServiceImpl implements ReserveService {
 	@Override
 	public List<Reserve> findPastReserve(Integer member_id, String today) {
 		return mapper.findPastReserve(member_id, today);
+	}
+
+	@Override
+	public List<Events> reserveDuplicationCheck() {
+		return mapper.reserveDuplicationCheck();
 	}
 
 }

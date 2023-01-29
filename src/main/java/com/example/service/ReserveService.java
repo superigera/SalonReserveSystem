@@ -2,6 +2,7 @@ package com.example.service;
 
 import java.util.List;
 
+import com.example.model.Events;
 import com.example.model.Reserve;
 
 public interface ReserveService {
@@ -23,4 +24,7 @@ public interface ReserveService {
 
 	// 予約登録
 	public void reservations(Integer id, String name, String email, String number, String date, String time);
+
+	// 予約重複チェック
+	public List<Events> reserveDuplicationCheck();
 }
