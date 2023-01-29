@@ -63,6 +63,9 @@ public class ReserveController {
 	@PostMapping("/date_select")
 	public String date_select(Model model, @ModelAttribute Menu menu) {
 
+		// ajaxなしで、固定値でカレンダーに渡すdataを作る
+		model.addAttribute("reserve_date", "2023-01-25T12:00:00");
+
 		return "reserve/date_select";
 	}
 

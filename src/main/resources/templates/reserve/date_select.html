@@ -91,84 +91,80 @@ button {
 			<form th:action="@{/reserve/new_reserve}" method="get">
 				<button type="submit" style="background-color: #ffffff; margin-right: 10px; padding: 10px; border-radius: 10px; ">メニュー選択に戻る</button>
 			</form>
+
 		</div>
 		<div id='calendar' style="margin: auto; width: 1000px; background-color: #ffffff; margin-top: 20px"></div>
 
 		<!-- カレンダー -->
-		<script>
+		<script th:inline="javascript">
 			document.addEventListener('DOMContentLoaded', function() {
-				
 				$.ajax({
 					  type: "GET",
-					  url: "http://localhost:8080/time",
+					  url: "http://localhost:8080/ajax_reserve",
 					  success: function (result) {
 					    console.log(result)
+					    
+					    var calendarEl = document.getElementById('calendar');
+						var date_start = new Date;
+						
+						var calendar = new FullCalendar.Calendar(calendarEl, {
+							dateClick: function(info) {
+								const selectDay = info.dateStr.substr(0,10)
+								const selectTime = info.dateStr.substr(11,5)
+								//console.log(selectDay)
+								//console.log(selectTime)
+							},
+							
+							//ループしたいところ
+							events: [
+							    {
+							      title  : '予約不可',
+							      start  : result[0]
+							    },
+							  ],
+							
+							  
+							  
+							initialView: 'timeGridWeek',
+							locale: 'ja',
+							height: '500px',
+							
+							headerToolbar: {
+								left : 'prev',
+								center : 'title',
+								right : 'next'
+							},
+							
+							views: {
+							  timeGridWeek: {
+							    slotMinTime: '09:00:00',
+							    slotMaxTime: '19:00:00'
+							  },
+							  timeGridDay: {
+							    slotMinTime: '09:00:00',
+							    slotMaxTime: '19:00:00'
+							  }
+							},
+							validRange:{
+				                start: date_start
+							},
+							contentHeight: 'auto',
+							allDaySlot: false,
+							
+							/* カレンダーの日付押下時に選択しているメニューへ日付を追加
+							navLinkDayClick: function(date) {
+								console.log(`${date.getFullYear()}-${("0"+(date.getMonth()+1)).slice(-2)}-${("0"+date.getDate()).slice(-2)}`)
+								const text = document.getElementById("day").textContent;
+								document.getElementById("day").textContent = `${date.getFullYear()}年${("0"+(date.getMonth()+1)).slice(-2)}月${("0"+date.getDate()).slice(-2)}日`
+								document.getElementById("reserve_date").setAttribute("value", "" + (date.getFullYear())　+ ("0"+(date.getMonth()+1)).slice(-2) + ("0"+date.getDate()).slice(-2));
+							},
+							*/
+						});
+						calendar.render();
 					  }
 					});
 				
-				var calendarEl = document.getElementById('calendar');
-				var date_start = new Date;
-				var calendar = new FullCalendar.Calendar(calendarEl, {
-					dateClick: function(info) {
-						const selectDay = info.dateStr.substr(0,10)
-						const selectTime = info.dateStr.substr(11,5)
-						//console.log(selectDay)
-						//console.log(selectTime)
-					},
-					
-					events: [
-					    {
-					      title  : 'event1',
-					      start  : '2022-12-26T12:30:00'
-					    },
-					    {
-					      title  : 'event2',
-					      start  : '2010-01-05',
-					      end    : '2010-01-07'
-					    },
-					    {
-					      title  : 'event3',
-					      start  : '2010-01-09T12:30:00',
-					      allDay : false // will make the time show
-					    }
-					  ],
-					
-					initialView: 'timeGridWeek',
-					locale: 'ja',
-					height: '500px',
-					
-					headerToolbar: {
-						left : 'prev',
-						center : 'title',
-						right : 'next'
-					},
-					
-					views: {
-					  timeGridWeek: {
-					    slotMinTime: '09:00:00',
-					    slotMaxTime: '19:00:00'
-					  },
-					  timeGridDay: {
-					    slotMinTime: '09:00:00',
-					    slotMaxTime: '19:00:00'
-					  }
-					},
-					validRange:{
-		                start: date_start
-					},
-					contentHeight: 'auto',
-					allDaySlot: false,
-					
-					/* カレンダーの日付押下時に選択しているメニューへ日付を追加
-					navLinkDayClick: function(date) {
-						console.log(`${date.getFullYear()}-${("0"+(date.getMonth()+1)).slice(-2)}-${("0"+date.getDate()).slice(-2)}`)
-						const text = document.getElementById("day").textContent;
-						document.getElementById("day").textContent = `${date.getFullYear()}年${("0"+(date.getMonth()+1)).slice(-2)}月${("0"+date.getDate()).slice(-2)}日`
-						document.getElementById("reserve_date").setAttribute("value", "" + (date.getFullYear())　+ ("0"+(date.getMonth()+1)).slice(-2) + ("0"+date.getDate()).slice(-2));
-					},
-					*/
-				});
-				calendar.render();
+				
 			});
 		</script>
 
