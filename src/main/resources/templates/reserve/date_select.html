@@ -4,7 +4,6 @@
 	layout:decorate="~{layout/layout}">
 <head>
 <meta charset="UTF-8">
-
 <link href='../../lib/main.css' rel='stylesheet' />
 <script src='../../lib/main.js'></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -50,11 +49,8 @@ button {
 					<th>メニュー名　</th>
 					<th>料金　</th>
 					<th>所要時間目安　</th>
-					<th>日付</th>
-					<th>時間</th>
-					<th></th>
 				<tr>
-				<form th:action="@{/reserve/input_info}" method="post" th:object="${menu}">
+				<form name="reserve_info" th:action="@{/reserve/input_info}" method="post" th:object="${menu}">
 					<tr th:each="menu_item:${menu}">
 						<td></td>
 							<input type="hidden" th:field="${menu.menu_id}" th:value="${menu.menu_id}"> 
@@ -64,28 +60,11 @@ button {
 							<input type="hidden" th:field="${menu.menu_price}" th:value="${menu.menu_price}"> 
 						<td th:text="${menu_item.menu_times}"></td>
 							<input type="hidden" th:field="${menu.menu_times}" th:value="${menu.menu_times}"> 
-						<td id="day">
-						</td>
 						<input id= reserve_date type="hidden" name="reserve_date"> 
-						<td>
-							<select name="time">
-								<option value="0900">9:00</option>
-								<option value="1000">10:00</option>
-								<option value="1100">11:00</option>
-								<option value="1200">12:00</option>
-								<option value="1300">13:00</option>
-								<option value="1500">15:00</option>
-								<option value="1600">16:00</option>
-								<option value="1700">17:00</option>
-								<option value="1800">18:00</option>
-								<option value="1900">19:00</option>
-							</select>
-						</td>
-						<td>
-							<button type="submit">予約</button>
-						</td>
+						<input id= time type="hidden" name="time"> 
 					</tr>
 				</form>
+
 			</table>
 			<!-- 戻るボタン -->
 			<form th:action="@{/reserve/new_reserve}" method="get">
@@ -98,26 +77,32 @@ button {
 		<!-- カレンダー -->
 		<script th:inline="javascript">
 			document.addEventListener('DOMContentLoaded', function() {
+
 				$.ajax({
 					  type: "GET",
 					  url: "http://localhost:8080/ajax_reserve",
+					  data: {
+						  menu_time: /*[[${menu.menu_times}]]*/
+					  },
+					  
 					  success: function (result) {
-					    console.log(result)
 					    
 					    var calendarEl = document.getElementById('calendar');
 						var date_start = new Date;
 						
 						var calendar = new FullCalendar.Calendar(calendarEl, {
 							dateClick: function(info) {
-								const selectDay = info.dateStr.substr(0,10)
+								const selectDay = info.dateStr.substr(0,4) + info.dateStr.substr(5,2) + info.dateStr.substr(8,2)
+								const confirmDay = info.dateStr.substr(0,4) + "年" + info.dateStr.substr(5,2) + "月" + info.dateStr.substr(8,2) + "日"
 								const selectTime = info.dateStr.substr(11,5)
-								//console.log(selectDay)
-								//console.log(selectTime)
+								if(confirm(confirmDay + selectTime +"に予約をしますか?")){
+									document.getElementById("reserve_date").setAttribute("value", selectDay)
+									document.getElementById("time").setAttribute("value", selectTime)
+									document.reserve_info.submit()
+								}
 							},
 							
-							events:"/ajax_reserve",
-							
-							  
+							events:result,
 							  
 							initialView: 'timeGridWeek',
 							locale: 'ja',
@@ -145,14 +130,6 @@ button {
 							contentHeight: 'auto',
 							allDaySlot: false,
 							
-							/* カレンダーの日付押下時に選択しているメニューへ日付を追加
-							navLinkDayClick: function(date) {
-								console.log(`${date.getFullYear()}-${("0"+(date.getMonth()+1)).slice(-2)}-${("0"+date.getDate()).slice(-2)}`)
-								const text = document.getElementById("day").textContent;
-								document.getElementById("day").textContent = `${date.getFullYear()}年${("0"+(date.getMonth()+1)).slice(-2)}月${("0"+date.getDate()).slice(-2)}日`
-								document.getElementById("reserve_date").setAttribute("value", "" + (date.getFullYear())　+ ("0"+(date.getMonth()+1)).slice(-2) + ("0"+date.getDate()).slice(-2));
-							},
-							*/
 						});
 						calendar.render();
 					  }

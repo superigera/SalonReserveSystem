@@ -73,16 +73,10 @@ public class ReserveController {
 	@PostMapping("/input_info")
 	public String input_info(Model model, @ModelAttribute Menu menu, @RequestParam("time") String time,
 			@RequestParam("reserve_date") String reserve_date, NonMember nonMember) {
-		StringBuilder sb_time = new StringBuilder();
-		sb_time.append(time);
-		sb_time.insert(2, ":");
 		String year = reserve_date.substring(0, 4);
 		String month = reserve_date.substring(4, 6);
 		String day = reserve_date.substring(6);
-//		List<Menu> menus = new ArrayList<>();
-//		menus.addAll(menuService.SearchMenu(menu_id));
-//		model.addAttribute("menus", menus);
-		model.addAttribute("time", sb_time);
+
 		model.addAttribute("year", year);
 		model.addAttribute("month", month);
 		model.addAttribute("days", day);

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,7 +19,9 @@ public class AjaxController {
 
 	// ajaxのデータでカレンダーに渡す
 	@GetMapping("/ajax_reserve")
-	public @ResponseBody List<Events> ajax_reserve() {
+	public @ResponseBody List<Events> ajax_reserve(@RequestParam("menu_time") String menu_time) {
+		System.out.println(menu_time);
+
 		List<Events> list = new ArrayList<>();
 		list.addAll(reserveServiceImpl.reserveDuplicationCheck());
 
@@ -44,7 +47,6 @@ public class AjaxController {
 
 			test.add(events);
 		}
-
 		return test;
 	}
 

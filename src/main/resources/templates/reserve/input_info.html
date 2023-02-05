@@ -46,7 +46,7 @@ div.flex {
 						<td th:text="${menu_item.menu_price}"></td>
 						<td th:text="${menu_item.menu_times}"></td>
 						<td>[[ ${year}]]年[[ ${month} ]]月[[ ${days} ]]日</td>
-						<td>[[ ${time} ]]</td>
+						<td>[[ ${reserve_time} ]]</td>
 				</tr>
 			</table>
 			<form th:action="@{/reserve/date_select}" method="post">
